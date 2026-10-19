@@ -1,7 +1,7 @@
 # Short 3 hochladen – Schul-WLAN (YouTube Shorts, TikTok, Instagram Reels)
 
-Datei: **`SlimClick-Short3.mp4`** (1080×1920, 27 s, Untertitel sind schon im Bild)
-Titelbild: **`SlimClick-Short3-Thumbnail.jpg`**
+Datei: **`SlimClick-Short3.mp4`** (1080×1920, 28 s, Untertitel sind schon im Bild)
+Titelbild: steckt als **Deckblatt in der ersten halben Sekunde** des Videos (zum Auswählen). Als Bild: `SlimClick-Short3-Thumbnail.jpg`
 
 ---
 
@@ -22,7 +22,7 @@ Many school networks keep devices apart. Turn on your phone’s hotspot, connect
 school wifi,school wifi blocked,phone hotspot,connect phone to laptop,presentation remote,school hacks,student tips,presentation tips,free software,SlimClick,shorts
 ```
 **Beim Hochladen:**
-- **Titelbild:** in der YouTube-App beim Short „Cover“ antippen und ein Bild am Anfang wählen (am PC geht bei Shorts kein eigenes Bild). Das Thumbnail ist für TikTok und Instagram.
+- **Titelbild:** in der YouTube-App beim Short **„Cover“** antippen und den Regler **ganz nach links** schieben – dort ist das Deckblatt.
 - **Ähnliches Video:** das Intro-Video auswählen
 - Zielgruppe: nicht speziell für Kinder · Untertitel **nicht** zusätzlich einschalten (sind eingebrannt)
 - Musik optional: in der App unter „Sound“ ein ruhiges Lied **ganz leise** (~8 %). Klick- und Wusch-Geräusche sind schon drin.
@@ -36,7 +36,7 @@ Free download link is in my profile 👆 Does your school Wi-Fi block stuff too?
 ```
 School Wi-Fi blocking your phone? 📶 It keeps devices apart. 10-second fix: phone hotspot on → connect laptop → scan again. 0 MB mobile data. Free for Windows & Mac – link in bio 🔗 #schoolhacks #studytok #wifi #presentation #studentlife
 ```
-- Cover: `SlimClick-Short3-Thumbnail.jpg` hochladen („Cover auswählen“ → „Hochladen“)
+- Cover: **„Cover auswählen“** → Regler **ganz nach links** (Deckblatt am Anfang)
 
 ## Instagram Reels
 ```
@@ -46,7 +46,7 @@ SlimClick is free 👉 link in bio
 
 #schoolhacks #studytips #studentlife #presentation #techtips #freesoftware
 ```
-- Titelbild: `SlimClick-Short3-Thumbnail.jpg` („Cover bearbeiten“ → „Aus Galerie hinzufügen“)
+- Titelbild: **„Cover bearbeiten“** → ganz an den **Anfang** schieben (Deckblatt)
 
 ---
 

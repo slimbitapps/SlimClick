@@ -1,7 +1,7 @@
 # Short 2 hochladen – Laserpointer (YouTube Shorts, TikTok, Instagram Reels)
 
-Datei: **`SlimClick-Short2.mp4`** (1080×1920, 23 s, Untertitel sind schon im Bild)
-Titelbild: **`SlimClick-Short2-Thumbnail.jpg`**
+Datei: **`SlimClick-Short2.mp4`** (1080×1920, 24 s, Untertitel sind schon im Bild)
+Titelbild: steckt als **Deckblatt in der ersten halben Sekunde** des Videos (zum Auswählen). Als Bild: `SlimClick-Short2-Thumbnail.jpg`
 
 ---
 
@@ -22,7 +22,7 @@ Touch the slide preview on your phone and a red laser dot appears exactly there 
 laser pointer,laser pointer app,presentation laser pointer,phone laser pointer,presentation tips,powerpoint tips,spotlight presentation,school presentation,student tips,free software,SlimClick,shorts
 ```
 **Beim Hochladen:**
-- **Titelbild:** in der YouTube-App beim Short „Cover“ antippen und ein Bild am Anfang wählen (am PC geht bei Shorts kein eigenes Bild). Das Thumbnail ist für TikTok und Instagram.
+- **Titelbild:** in der YouTube-App beim Short **„Cover“** antippen und den Regler **ganz nach links** schieben – dort ist das Deckblatt.
 - **Ähnliches Video:** das Intro-Video auswählen
 - Zielgruppe: nicht speziell für Kinder · Untertitel **nicht** zusätzlich einschalten (sind eingebrannt)
 - Musik optional: in der App unter „Sound“ ein ruhiges Lied **ganz leise** (~8 %). Klick- und Wusch-Geräusche sind schon drin.
@@ -36,7 +36,7 @@ Free download link is in my profile 👆 Laser or spotlight – which one would 
 ```
 No laser pointer? 🔴 Tap the slide preview on your phone → the red dot appears on the projector. Spotlight mode too. Free for Windows & Mac – link in bio 🔗 #studytok #presentation #schoolhacks #techtok #studentlife
 ```
-- Cover: `SlimClick-Short2-Thumbnail.jpg` hochladen („Cover auswählen“ → „Hochladen“)
+- Cover: **„Cover auswählen“** → Regler **ganz nach links** (Deckblatt am Anfang)
 
 ## Instagram Reels
 ```
@@ -46,7 +46,7 @@ SlimClick is free for Windows & Mac 👉 link in bio
 
 #presentation #studytips #studentlife #schoolhacks #techtips #freesoftware
 ```
-- Titelbild: `SlimClick-Short2-Thumbnail.jpg` („Cover bearbeiten“ → „Aus Galerie hinzufügen“)
+- Titelbild: **„Cover bearbeiten“** → ganz an den **Anfang** schieben (Deckblatt)
 
 ---
 

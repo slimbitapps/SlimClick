@@ -7,6 +7,7 @@ import os, re, subprocess, sys
 WORK, TEXT, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 SUF = ('-' + sys.argv[4]) if len(sys.argv) > 4 else ''
 LEAD = 0.15
+COVER = float(os.environ.get('COVER', '0.5'))  # Deckblatt vorne (finish.sh) verschiebt alles um 0,5 s
 durs = [float(x) for x in open(os.path.join(WORK, 'durations' + SUF + '.txt')).read().split(',')]
 paras = [p.strip() for p in open(TEXT).read().split('\n\n') if p.strip()]
 
@@ -37,7 +38,7 @@ def chunks(par):
     return out
 
 
-lines, n, start = [], 0, 0.0
+lines, n, start = [], 0, COVER
 for i, par in enumerate(paras):
     a = start + LEAD + 0.2
     length = dur(os.path.join(WORK, 'voice' + SUF, f'absatz-{i + 1:02d}.wav')) - 0.45

@@ -33,10 +33,18 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
 5. **Rendern:** wie 1., aber ohne `--preview` und mit
    `--durations $(cat WORK/durations-short1.txt) --voicedir WORK/voice-short1 --voice WORK/voice-aligned-short1.wav`.
    Danach Ereignisse an die echten Wortzeiten aus `words.py` anpassen.
-6. **Fertig machen:** `ffmpeg -i master.mp4 -c:v libx264 -preset slow -crf 20 -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart FINAL.mp4` (Intro: `I=-15`).
-7. **Sync prüfen:** `words.py FINAL.mp4` + Standbilder an den Schlüsselwörtern.
+6. **Thumbnails:** `node scripts/video/thumbnails.cjs video-out`
+7. **Fertig machen:** `bash scripts/video/finish.sh master.mp4 THUMBNAIL.jpg FINAL.mp4 -14` (Intro: `-15`)
+   → setzt das Thumbnail **0,5 s als Deckblatt** vor das Video (eigene Thumbnails darf das Konto noch nicht hochladen;
+   so lässt es sich beim Hochladen als Titelbild auswählen) und normalisiert die Lautheit in zwei Durchgängen.
+   Alles auf einmal (Rendern + Deckblatt + Lautheit): `bash scripts/video/render-all.sh WORK video-out`.
+   Untertitel (nur Englisch): `python3 scripts/video/intro/subtitles.py WORK docs/SPRECHTEXT-INTRO.txt docs/SlimClick-Intro-EN.srt intro`
+   (berücksichtigt das Deckblatt automatisch).
+8. **Sync prüfen:** `words.py FINAL.mp4` + Standbilder an den Schlüsselwörtern (alle Zeiten +0,5 s wegen Deckblatt).
 
 ## Regeln
+- **Keine Übersetzungen** liefern (keine deutschen Untertitel/Titel) – nur Englisch.
+- **Deckblatt** immer 0,5 s am Anfang (siehe 7.).
 - Hook in der 1. Sekunde, ein Gedanke pro Short, 25–35 s, Prinzip als Animation, am Ende echte App + Logo + „Link in profile“.
 - Zielgruppe Schüler & Studenten: Referat-Situation, lockere Sprache, schnelle Schnitte, große Wörter.
 - Keine Maus-/Tastatur-Einblendungen über der echten App. Wortenden der Stimme nie abschneiden.

@@ -1,6 +1,6 @@
 # YouTube-Upload: SlimClick Intro-Video – alles zum Kopieren
 
-Dateien (von Claude geschickt): **`SlimClick-Intro.mp4`** (1920×1080, 1:22, Untertitel im Bild) · **`SlimClick-Thumbnail.jpg`** (1280×720) ·
+Dateien (von Claude geschickt): **`SlimClick-Intro.mp4`** (1920×1080, 1:23, Untertitel im Bild, **Deckblatt in der ersten halben Sekunde**) · **`SlimClick-Thumbnail.jpg`** (1280×720) ·
 **`SlimClick-Intro-EN.srt`** + **`SlimClick-Intro-DE.srt`** (Untertitel-Dateien, liegen auch in `docs/`)
 
 ---
@@ -33,9 +33,9 @@ Presentation at school or uni and no clicker? Open SlimClick on your laptop, sca
 
 ⏱️ Chapters
 0:00 Walking to your laptop for every slide
-0:19 Scan the QR code & tap next
+0:20 Scan the QR code & tap next
 0:33 Live preview & laser pointer
-0:49 Timer & school Wi-Fi
+0:50 Timer & school Wi-Fi
 1:04 Secure & free download
 
 ❓ FAQ
@@ -76,7 +76,7 @@ Impressum: https://slimbitapps.github.io/impressum.html
 ## 5. Einstellungen beim Hochladen
 | Feld | Auswahl |
 |---|---|
-| Vorschaubild | `SlimClick-Thumbnail.jpg` |
+| Vorschaubild | Eigene Bilder hochladen geht mit deinem Konto noch nicht. Bei normalen Videos schlägt YouTube 3 Bilder aus dem Video vor – nimm das **Deckblatt** (vom Anfang), falls es dabei ist. Freie Auswahl gibt es erst mit einem per Telefon bestätigten Konto (YouTube Studio → Einstellungen → Kanal → Zugriff auf Funktionen) – das am besten zusammen mit deinen Eltern. |
 | Playlist | neue Playlist **„SlimClick“** |
 | Zielgruppe | **Nein, nicht speziell für Kinder** |
 | Bezahlte Werbung | **nein** |
