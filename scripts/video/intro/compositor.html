@@ -66,14 +66,14 @@ scene('friend', (r, s) => {
   s.lag = el('div', 'chip', r, '🐢 always one slide behind');
   css(s.lag, { left: '50%', top: '820px', fontSize: '40px' });
 }, (s, lt, D) => {
-  fadeUp(s.b1, lt, 0.3);
-  fadeUp(s.b2, lt, D * 0.35);
-  showTimeline(s.wall.deck, lt, [{ t: D * 0.6, idx: 2 }], 1);
-  const k = E.back(p(lt, D * 0.62, 0.4));
-  s.lag.style.opacity = p(lt, D * 0.62, 0.2);
+  fadeUp(s.b1, lt, 0.9); // „a friend“
+  fadeUp(s.b2, lt, 2.2); // „and somehow“
+  showTimeline(s.wall.deck, lt, [{ t: 3.6, idx: 2 }], 1); // „one slide behind“
+  const k = E.back(p(lt, 3.7, 0.4));
+  s.lag.style.opacity = p(lt, 3.7, 0.2);
   s.lag.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * k})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 0.3, type: 'pop' }, { t: D * 0.35, type: 'pop' }, { t: D * 0.6, type: 'whoosh' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 0.9, type: 'pop' }, { t: 2.2, type: 'pop' }, { t: 3.6, type: 'whoosh' }];
 
 // ---------- 3: SlimClick – Logo
 scene('logo', (r, s) => {
@@ -88,13 +88,13 @@ scene('logo', (r, s) => {
 }, (s, lt, D) => {
   const k = E.back(p(lt, 0.1, 0.7));
   s.icon.style.transform = `scale(${k}) rotate(${(1 - k) * -20}deg)`;
-  fadeUp(s.name, lt, 0.5, 0.5);
+  fadeUp(s.name, lt, 0.75, 0.5); // „SlimClick“
   drawWords(s.tag, lt, D * 0.3, 0.1);
-  const kn = E.back(p(lt, D * 0.62, 0.4));
-  s.noapp.style.opacity = p(lt, D * 0.62, 0.2);
+  const kn = E.back(p(lt, 5.2, 0.4)); // „install an app“
+  s.noapp.style.opacity = p(lt, 5.2, 0.2);
   s.noapp.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kn})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 0.1, type: 'whoosh' }, { t: 0.55, type: 'pop' }, { t: D * 0.62, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 0.1, type: 'whoosh' }, { t: 0.75, type: 'pop' }, { t: 5.2, type: 'pop' }];
 
 // ---------- 4: QR-Code scannen
 scene('scan', (r, s) => {
@@ -112,18 +112,19 @@ scene('scan', (r, s) => {
 }, (s, lt, D) => {
   const k = E.out(p(lt, 0, 0.6));
   place(s.lap, { s: 0.95 + 0.05 * k });
-  const kp = E.out(p(lt, D * 0.15, 0.6));
-  s.ph.place(PHR.x, PHR.y + (1 - kp) * 300, 1, 4 * (1 - kp), p(lt, D * 0.15, 0.2));
-  const found = p(lt, D * 0.4, 0.25);
+  // Zeiten = gesprochene Wörter: „phone's camera“ 3.4, „web page opens“ 4.9, „That's your remote“ 6.2
+  const kp = E.out(p(lt, 2.4, 0.6));
+  s.ph.place(PHR.x, PHR.y + (1 - kp) * 300, 1, 4 * (1 - kp), p(lt, 2.4, 0.2));
+  const found = p(lt, 3.85, 0.25);
   s.cam.box.style.opacity = found;
-  s.cam.banner.style.opacity = p(lt, D * 0.5, 0.2);
-  tapAt(s.ph, 195, 108, lt - D * 0.62);
-  const sw = p(lt, D * 0.7, 0.3);
+  s.cam.banner.style.opacity = p(lt, 4.8, 0.2);
+  tapAt(s.ph, 195, 108, lt - 5.3);
+  const sw = p(lt, 5.9, 0.3);
   s.ph.alt.style.opacity = 1 - sw;
   s.ph.alt.style.display = sw < 1 ? 'block' : 'none';
-  [0.05, 0.4, 0.72].forEach((at, i) => fadeUp(s.steps[i], lt, D * at));
+  [0.5, 3.4, 6.2].forEach((at, i) => fadeUp(s.steps[i], lt, at));
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.4, type: 'pop' }, { t: D * 0.62, type: 'click' }, { t: D * 0.72, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 3.85, type: 'pop' }, { t: 5.3, type: 'click' }, { t: 6.2, type: 'pop' }];
 
 // ---------- 5: Weiter tippen – in jedem Programm
 const APPS = [['PowerPoint', '#c43e1c'], ['Keynote', '#1a73e8'], ['Google Slides', '#f4b400'], ['PDF', '#e5252a']];
@@ -137,7 +138,7 @@ scene('tap', (r, s) => {
   });
 }, (s, lt, D) => {
   if (!s.taps) {
-    s.taps = [0.12, 0.32, 0.52, 0.72].map((k) => k * D);
+    s.taps = [0.85, 2.0, 3.6, 5.1]; // „tap next“, dann im Takt der App-Namen
     s.changes = s.taps.map((t, i) => ({ t: t + 0.08, idx: i + 1 }));
   }
   showTimeline(s.wall.deck, lt, s.changes);
@@ -147,7 +148,7 @@ scene('tap', (r, s) => {
   tapAt(s.ph, 242, 590, since);
   pressBtn(s.ph.next, since);
   s.apps.forEach((a, i) => {
-    const at = D * (0.35 + i * 0.1);
+    const at = [2.0, 2.85, 3.5, 5.1][i]; // PowerPoint, Keynote, Google Slides, PDFs
     const k = E.back(p(lt, at, 0.4));
     a.style.opacity = p(lt, at, 0.15);
     a.style.transform = `scale(${0.6 + 0.4 * k})`;
@@ -169,11 +170,11 @@ scene('preview', (r, s) => {
   s.ph.place(1180, 120 + (1 - z) * 200, 1 + 0.05 * Math.sin(lt * 0.8));
   s.ph.ring.style.opacity = p(lt, 0.8, 0.3) * (0.6 + 0.4 * Math.sin(lt * 5));
   showTimeline(s.ph.deck, lt, [{ t: D * 0.6, idx: 3 }], 2);
-  drawWords(s.t1, lt, 0.2, 0.1);
-  drawWords(s.t2, lt, D * 0.4, 0.1);
-  fadeUp(s.lbl, lt, 0.9);
+  drawWords(s.t1, lt, 3.8, 0.1); // „face your audience“
+  drawWords(s.t2, lt, 5.0, 0.1); // „still know exactly“
+  fadeUp(s.lbl, lt, 1.6); // „live preview“
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 0.9, type: 'pop' }, { t: D * 0.6, type: 'whoosh' }];
+scenes[scenes.length - 1].sfx = (D) => [{ t: 1.6, type: 'pop' }, { t: D * 0.6, type: 'whoosh' }];
 
 // ---------- 7: Laserpointer + Spotlight
 scene('laser', (r, s) => {
@@ -184,7 +185,7 @@ scene('laser', (r, s) => {
   s.lbl = el('div', 'chip', r, '');
   css(s.lbl, { left: '140px', top: '800px', fontSize: '38px' });
 }, (s, lt, D) => {
-  const tLaser = D * 0.12, tDown = D * 0.22, tSpot = D * 0.68;
+  const tLaser = 1.95, tDown = 2.65, tSpot = 6.45; // „laser“, „touch the preview“, „spotlight“
   const laserOn = lt >= tLaser && lt < tSpot, spotOn = lt >= tSpot;
   toolOn(s.ph, spotOn ? 1 : 0, laserOn || spotOn);
   s.ph.ring.style.opacity = laserOn || spotOn ? 1 : 0;
@@ -208,7 +209,7 @@ scene('laser', (r, s) => {
   s.lbl.innerHTML = spotOn ? '◉ Spotlight' : '● Laser – touch the preview';
   s.lbl.style.opacity = p(lt, tLaser, 0.3);
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.12 - 0.03, type: 'click' }, { t: D * 0.22, type: 'pop' }, { t: D * 0.68 - 0.03, type: 'click' }, { t: D * 0.68 + 0.4, type: 'whoosh' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 1.92, type: 'click' }, { t: 2.65, type: 'pop' }, { t: 6.42, type: 'click' }, { t: 6.85, type: 'whoosh' }];
 
 // ---------- 8: Timer mit leiser Warnung
 scene('timer', (r, s) => {
@@ -221,12 +222,12 @@ scene('timer', (r, s) => {
   css(s.quiet, { left: '170px', top: '620px', fontSize: '40px' });
 }, (s, lt, D) => {
   // 5:03 → 4:5x: bei 5:00 blitzt der Bildschirm gelb auf
-  const remain = 303 - lt * 1.2;
+  const flashAt = 4.0; // „flashes“
+  const remain = 300 + (flashAt - lt) * 1.2;
   const mm = Math.floor(remain / 60), ss = Math.floor(remain % 60);
   const txt = `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
   s.big.textContent = txt;
   s.ph.timer.textContent = txt;
-  const flashAt = 3 / 1.2;
   const f = lt >= flashAt ? Math.max(0, Math.sin(((lt - flashAt) / 1.4) * Math.PI * 3)) * (1 - p(lt, flashAt + 1.3, 0.2)) : 0;
   s.ph.flash.style.background = '#f6b03c';
   s.ph.flash.style.opacity = f * 0.6;
@@ -237,7 +238,7 @@ scene('timer', (r, s) => {
   drawWords(s.t, lt, 0.4, 0.08);
   fadeUp(s.quiet, lt, flashAt + 0.6);
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 3 / 1.2, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 4.0, type: 'pop' }];
 
 // ---------- 9: Schul-WLAN → Hotspot
 const NODES = { phone: [600, 620], laptop: [1320, 620], router: [960, 260] };
@@ -262,7 +263,7 @@ scene('wifi', (r, s) => {
     ln.setAttribute('stroke', color); ln.setAttribute('stroke-dasharray', dash);
   };
 }, (s, lt, D) => {
-  const fix = D * 0.5;
+  const fix = 4.6; // kurz vor „hotspot“
   const out = p(lt, fix, 0.5);
   s.line(s.L.a, 'phone', 'router', E.out(p(lt, 0.2, 0.5)), 'rgba(255,255,255,.35)');
   s.line(s.L.b, 'laptop', 'router', E.out(p(lt, 0.4, 0.5)), 'rgba(255,255,255,.35)');
@@ -271,8 +272,8 @@ scene('wifi', (r, s) => {
   const blocked = lt < fix;
   s.line(s.L.c, blocked ? 'phone' : 'laptop', blocked ? 'laptop' : 'phone', blocked ? 1 : E.io(p(lt, fix + 0.6, 0.5)), blocked ? '#ff4d6d' : '#33c37a', blocked ? '22 18' : '');
   s.L.c.style.opacity = blocked ? 0.7 * p(lt, 0.8, 0.3) : lt >= fix + 0.6 ? 1 : 0;
-  const kx = E.back(p(lt, 1.0, 0.35));
-  s.x.style.opacity = p(lt, 1.0, 0.1) * (1 - out);
+  const kx = E.back(p(lt, 1.45, 0.35)); // „blocks the connection“
+  s.x.style.opacity = p(lt, 1.45, 0.1) * (1 - out);
   s.x.style.transform = `scale(${0.5 + 0.5 * kx})`;
   s.rings.forEach((c, i) => {
     const q = ((lt - fix) * 0.8 + i / 3) % 1;
@@ -283,7 +284,7 @@ scene('wifi', (r, s) => {
   s.chip.style.opacity = p(lt, fix + 1.0, 0.2);
   s.chip.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kc})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 1.0, type: 'pop' }, { t: D * 0.5 + 0.6, type: 'whoosh' }, { t: D * 0.5 + 1.0, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 1.45, type: 'pop' }, { t: 5.2, type: 'whoosh' }, { t: 5.6, type: 'pop' }];
 
 // ---------- 10: Sicherheit
 scene('secure', (r, s) => {
@@ -297,16 +298,16 @@ scene('secure', (r, s) => {
   css(s.shot, { left: '800px', top: '170px', width: '980px', borderRadius: '20px', boxShadow: '0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08)' });
 }, (s, lt, D) => {
   s.cards.forEach((c, i) => {
-    const at = D * (0.08 + i * 0.27);
+    const at = [1.6, 3.8, 5.5][i]; // „QR code“, „every command“, „nobody else“
     const k = E.back(p(lt, at, 0.45));
     c.style.opacity = p(lt, at, 0.2);
     c.style.transform = `translateX(${(1 - k) * -80}px)`;
   });
-  const k = E.out(p(lt, D * 0.55, 0.6));
+  const k = E.out(p(lt, 6.3, 0.6)); // „without your permission“
   s.shot.style.opacity = k;
   s.shot.style.transform = `perspective(2000px) rotateY(${-14 * (1 - k)}deg) scale(${0.92 + 0.08 * k})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [0.08, 0.35, 0.62].map((k) => ({ t: D * k, type: 'pop' }));
+scenes[scenes.length - 1].sfx = () => [1.6, 3.8, 5.5].map((t) => ({ t, type: 'pop' }));
 
 // ---------- 11: echte App + Link
 scene('cta', (r, s) => ctaScene(r, s, { vertical: false, link: 'Link in description ↓' }), (s, lt) => ctaDraw(s, lt, false));

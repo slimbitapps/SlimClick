@@ -1,0 +1,127 @@
+1
+00:00:00,350 --> 00:00:02,456
+Stell dir vor: Du stehst vor der ganzen Klasse,
+
+2
+00:00:02,506 --> 00:00:04,063
+deine Folien laufen auf dem Beamer,
+
+3
+00:00:04,113 --> 00:00:07,000
+und für jede neue Folie musst du zurück zu deinem Laptop laufen.
+
+4
+00:00:08,000 --> 00:00:10,153
+Oder du bittest einen Freund, für dich zu klicken,
+
+5
+00:00:10,203 --> 00:00:12,179
+und irgendwie ist er immer eine Folie zu spät.
+
+6
+00:00:13,200 --> 00:00:14,779
+Genau deshalb habe ich SlimClick gebaut.
+
+7
+00:00:14,829 --> 00:00:16,897
+Es macht dein Handy zur Präsentations-Fernbedienung,
+
+8
+00:00:16,947 --> 00:00:18,730
+und du musst nicht mal eine App installieren.
+
+9
+00:00:19,800 --> 00:00:23,502
+Du öffnest SlimClick auf deinem Laptop, scannst den QR-Code mit der Handy-Kamera,
+
+10
+00:00:23,552 --> 00:00:24,892
+und eine Webseite öffnet sich.
+
+11
+00:00:24,942 --> 00:00:26,190
+Das ist deine Fernbedienung.
+
+12
+00:00:27,199 --> 00:00:28,963
+Jetzt tippst du einfach auf Weiter.
+
+13
+00:00:29,013 --> 00:00:32,539
+Das klappt mit PowerPoint, Keynote, Google Slides und sogar mit PDFs.
+
+14
+00:00:33,800 --> 00:00:36,810
+Dein Handy zeigt dir außerdem eine Live-Vorschau der aktuellen Folie.
+
+15
+00:00:36,860 --> 00:00:39,960
+So kannst du zum Publikum schauen und weißt trotzdem genau, wo du bist.
+
+16
+00:00:40,960 --> 00:00:42,215
+Du willst auf etwas zeigen?
+
+17
+00:00:42,265 --> 00:00:44,440
+Schalte den Laser ein, tippe auf die Vorschau,
+
+18
+00:00:44,490 --> 00:00:47,245
+und genau dort erscheint ein roter Punkt auf der Leinwand.
+
+19
+00:00:47,295 --> 00:00:49,180
+Das Spotlight macht alles andere dunkel.
+
+20
+00:00:50,179 --> 00:00:51,401
+Es gibt auch einen Timer.
+
+21
+00:00:51,451 --> 00:00:55,013
+Ein paar Minuten vor dem Ende blinkt dein Handy-Bildschirm unauffällig,
+
+22
+00:00:55,063 --> 00:00:56,590
+damit du nie wieder überziehst.
+
+23
+00:00:57,589 --> 00:00:59,522
+Und falls dein Schul-WLAN die Verbindung blockiert,
+
+24
+00:00:59,572 --> 00:01:01,077
+zeigt dir SlimClick Schritt für Schritt,
+
+25
+00:01:01,127 --> 00:01:03,059
+wie du stattdessen den Hotspot deines Handys nutzt.
+
+26
+00:01:04,790 --> 00:01:05,918
+Außerdem ist es sicher.
+
+27
+00:01:05,968 --> 00:01:09,146
+Der QR-Code funktioniert nur einmal, jeder Befehl ist signiert,
+
+28
+00:01:09,196 --> 00:01:12,170
+und niemand kann ohne deine Erlaubnis deine Folien steuern.
+
+29
+00:01:13,170 --> 00:01:15,918
+SlimClick ist komplett kostenlos für Windows und Mac,
+
+30
+00:01:15,968 --> 00:01:17,397
+ohne Werbung und ohne Konto.
+
+31
+00:01:17,447 --> 00:01:19,510
+Den Link findest du in der Beschreibung.
+
+32
+00:01:19,560 --> 00:01:21,886
+Viel Erfolg bei deiner nächsten Präsentation.

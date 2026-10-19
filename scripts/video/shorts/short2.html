@@ -35,19 +35,19 @@ scene('hook', (r, s) => {
   drawWords(s.t2, lt, D * 0.6, 0.1);
   // Zittriger Laserpunkt (so sieht es mit echten Pointern aus)
   const u = 0.6 + 0.02 * Math.sin(lt * 23) + 0.015 * Math.sin(lt * 37), v = 0.45 + 0.02 * Math.cos(lt * 29);
-  const on = 1 - p(lt, D * 0.45, 0.2);
+  const on = 1 - p(lt, 1.05, 0.2);
   s.wall.laser(u, v, on);
   const tx = WALL.x + u * WALL.w, ty = WALL.y + v * (WALL.w * 9 / 16);
   const len = Math.hypot(tx - 541, 1080 - ty);
   css(s.beam, { top: 1080 - len + 'px', height: len + 'px', opacity: on * 0.85, transform: `rotate(${Math.atan2(tx - 541, 1080 - ty) * 57.3}deg)` });
-  const kx = E.back(p(lt, D * 0.4, 0.3));
-  s.x.style.opacity = p(lt, D * 0.4, 0.1) * (1 - p(lt, D * 0.7, 0.2));
+  const kx = E.back(p(lt, 0.95, 0.3)); // „laser pointer“
+  s.x.style.opacity = p(lt, 0.95, 0.1) * (1 - p(lt, D * 0.7, 0.2));
   s.x.style.transform = `scale(${0.4 + 0.6 * kx})`;
   const kf = E.in(p(lt, D * 0.62, 0.4));
   s.pen.style.transform = `translateY(${kf * 900}px) rotate(${kf * 30}deg)`;
   s.pen.style.opacity = 1 - kf;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.4, type: 'pop' }, { t: D * 0.62, type: 'whoosh' }];
+scenes[scenes.length - 1].sfx = (D) => [{ t: 0.95, type: 'pop' }, { t: D * 0.62, type: 'whoosh' }];
 
 // ---------- 2–4: Laser einschalten, zeigen, Spotlight
 scene('laser', (r, s) => {
@@ -73,13 +73,14 @@ scene('laser', (r, s) => {
   const kin = E.back(p(lt, 0, 0.6));
   s.ph.place(PH.x, PH.y + (1 - kin) * 700, 1, 0, p(lt, 0, 0.2));
   // Werkzeug antippen
-  const tLaser = o2 + 0.4 * L2, tSpot = o4 + 0.12 * L4;
+  // Zeiten = gesprochene Wörter (aus words.py, Sekunden ab Szenenbeginn)
+  const tLaser = o2 + 0.75, tSpot = o4 + 1.9; // „laser“, „spotlight“
   const laserOn = lt >= tLaser && lt < tSpot, spotOn = lt >= tSpot;
   toolOn(s.ph, spotOn ? 1 : 0, laserOn || spotOn);
   s.ph.ring.style.opacity = laserOn || spotOn ? 1 : 0;
   // Fingerweg auf der Vorschau (u, v in 0..1)
   let touch = null;
-  const tDown = o2 + 0.72 * L2;
+  const tDown = o2 + 2.35; // „touch the slide preview“
   if (laserOn && lt >= tDown) {
     if (lt < o3) touch = [0.45, 0.55];
     else {
@@ -106,12 +107,12 @@ scene('laser', (r, s) => {
   phoneSpot(s.ph, ...(spot || [0.5, 0.5]), spot ? 1 : 0);
   s.wall.laser(...(touch || [0, 0]), touch ? 1 : 0);
   s.wall.spotlight(...(spot || [0.5, 0.5]), spot ? E.out(p(lt, tSpot + 0.5, 0.3)) : 0);
-  s.mirror.style.opacity = phase === 1 ? p(lt, o3 + 0.3, 0.3) : 0;
+  s.mirror.style.opacity = phase === 1 ? p(lt, o3 + 3.9, 0.3) : 0; // „right on the projector“
   s.mirror.style.transform = 'translateX(-50%)';
 }, 3);
 scenes[scenes.length - 1].sfx = function (D) {
   const [o2, o3, o4] = this.pOff;
-  return [{ t: o2 + 0.4 * (o3 - o2) - 0.03, type: 'click' }, { t: o2 + 0.72 * (o3 - o2), type: 'pop' }, { t: o4 + 0.12 * (D - o4) - 0.03, type: 'click' }, { t: o4 + 0.12 * (D - o4) + 0.5, type: 'whoosh' }];
+  return [{ t: o2 + 0.72, type: 'click' }, { t: o2 + 2.35, type: 'pop' }, { t: o4 + 1.87, type: 'click' }, { t: o4 + 2.4, type: 'whoosh' }];
 };
 
 // ---------- 5: echte App + Link

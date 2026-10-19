@@ -59,21 +59,22 @@ scene('scan', (r, s) => {
   // Handy fährt hoch und zielt auf den QR-Code
   const kp = E.out(p(lt, 0.2, 0.7));
   s.ph.place(370, 950 + (1 - kp) * 400, 1, -6 * (1 - kp) + 2 * Math.sin(lt * 1.3) * (1 - p(lt, D * 0.6, 0.3)));
-  const found = p(lt, D * 0.32, 0.25);
+  // Zeiten = gesprochene Wörter (aus words.py, Sekunden ab Szenenbeginn)
+  const found = p(lt, 2.6, 0.25); // „QR code“
   s.cam.box.style.opacity = found;
   s.cam.box.style.transform = `scale(${1.25 - 0.25 * E.out(found)})`;
-  s.cam.banner.style.opacity = p(lt, D * 0.48, 0.25);
-  s.cam.banner.style.transform = `translateY(${(1 - E.out(p(lt, D * 0.48, 0.3))) * -30}px)`;
-  tapAt(s.ph, 195, 108, lt - D * 0.62);
+  s.cam.banner.style.opacity = p(lt, 3.1, 0.25); // „camera“
+  s.cam.banner.style.transform = `translateY(${(1 - E.out(p(lt, 3.1, 0.3))) * -30}px)`;
+  tapAt(s.ph, 195, 108, lt - 3.5);
   // Kamera → Fernbedienung
-  const sw = p(lt, D * 0.68, 0.3);
+  const sw = p(lt, 3.8, 0.3); // „no app“
   s.ph.alt.style.opacity = 1 - sw;
   s.ph.alt.style.display = sw < 1 ? 'block' : 'none';
-  const ko = E.back(p(lt, D * 0.74, 0.4));
-  s.ok.style.opacity = p(lt, D * 0.74, 0.2);
+  const ko = E.back(p(lt, 4.5, 0.4)); // „install“
+  s.ok.style.opacity = p(lt, 4.5, 0.2);
   s.ok.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * ko})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.32, type: 'pop' }, { t: D * 0.62, type: 'click' }, { t: D * 0.74, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 2.6, type: 'pop' }, { t: 3.5, type: 'click' }, { t: 4.5, type: 'pop' }];
 
 // ---------- 3+4: Tippen → Folie wechselt, überall; dann die Live-Vorschau
 const APPS = [['PowerPoint', '#c43e1c'], ['Keynote', '#1a73e8'], ['Google Slides', '#f4b400'], ['PDF', '#e5252a']];
@@ -94,7 +95,8 @@ scene('tap', (r, s) => {
   const [o3, o4] = s.pOff;
   const L3 = o4 - o3;
   if (!s.taps) {
-    s.taps = [0.12, 0.34, 0.56, 0.78].map((k) => o3 + k * L3);
+    // „tap“, „slide forward“, „Keynote“ … und im 2. Absatz „comes next“
+    s.taps = [o3 + 0.8, o3 + 2.2, o3 + 4.1, o4 + 3.1];
     s.changes = s.taps.map((t, i) => ({ t: t + 0.08, idx: i + 1 }));
   }
   const ph3 = lt < o4;
@@ -110,24 +112,24 @@ scene('tap', (r, s) => {
   place(s.lap, { s: 1 });
   // App-Namen tauchen auf
   s.apps.forEach((a, i) => {
-    const at = o3 + (0.15 + i * 0.18) * L3;
+    const at = o3 + [3.05, 3.9, 4.6, 5.6][i]; // wenn der Name gesprochen wird
     const k = E.back(p(lt, at, 0.4));
     a.style.opacity = ph3 ? p(lt, at, 0.15) : 1 - p(lt, o4, 0.25);
     a.style.transform = `scale(${0.6 + 0.4 * k}) rotate(${(i % 2 ? 4 : -4) * (1 - k)}deg)`;
   });
   // Absatz 4: Handy holt die Vorschau groß nach vorne
-  const z = E.io(p(lt, o4 + 0.2, 0.7));
+  const z = E.io(p(lt, o4 + 0.7, 0.7)); // „live preview“
   s.ph.place(370 - 85 * z, 950 - 520 * z, 1 + 0.5 * z);
   s.ph.ring.style.opacity = z * (0.6 + 0.4 * Math.sin(lt * 6));
   s.lap.win.style.opacity = 1 - 0.75 * z;
-  s.pvLbl.style.opacity = p(lt, o4 + 0.8, 0.3);
-  s.pvLbl.style.transform = `translateX(-50%) translateY(${(1 - E.out(p(lt, o4 + 0.8, 0.4))) * 30}px)`;
+  s.pvLbl.style.opacity = p(lt, o4 + 1.9, 0.3); // „you always know“
+  s.pvLbl.style.transform = `translateX(-50%) translateY(${(1 - E.out(p(lt, o4 + 1.9, 0.4))) * 30}px)`;
   css(s.pvLbl, { top: 270 + 'px' });
   void idx;
 }, 2);
 scenes[scenes.length - 1].sfx = function (D) {
   this.draw(this, 0, D);
-  return this.taps.flatMap((t) => [{ t: t - 0.03, type: 'click' }, { t: t + 0.08, type: 'whoosh' }]).concat([{ t: this.pOff[1] + 0.2, type: 'whoosh' }]);
+  return this.taps.flatMap((t) => [{ t: t - 0.03, type: 'click' }, { t: t + 0.08, type: 'whoosh' }]).concat([{ t: this.pOff[1] + 0.7, type: 'whoosh' }]);
 };
 
 // ---------- 5: echte App + Link

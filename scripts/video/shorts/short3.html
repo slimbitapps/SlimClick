@@ -67,16 +67,16 @@ scene('hook', (r, s) => {
   const tries = (lt * 1.1) % 1;
   s.n.line(s.n.l.pl, 'phone', 'laptop', lt < D * 0.55 ? Math.min(0.48, tries) : 0.48, '#ff4d6d', '22 18');
   s.n.l.pl.style.opacity = 1;
-  const kx = E.back(p(lt, 0.6, 0.35));
-  s.n.x.style.opacity = p(lt, 0.6, 0.1);
+  const kx = E.back(p(lt, 0.85, 0.35)); // „connect“
+  s.n.x.style.opacity = p(lt, 0.85, 0.1);
   s.n.x.style.transform = `scale(${0.5 + 0.5 * kx})`;
   ['pr', 'lr'].forEach((k) => (s.n.l[k].style.opacity = 0));
   s.n.rings.forEach((c) => (c.style.opacity = 0));
-  const kf = E.back(p(lt, D * 0.55, 0.45));
-  s.fault.style.opacity = p(lt, D * 0.55, 0.2);
+  const kf = E.back(p(lt, 3.0, 0.45)); // „school Wi-Fi“
+  s.fault.style.opacity = p(lt, 3.0, 0.2);
   s.fault.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kf})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 0.6, type: 'pop' }, { t: D * 0.55, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 0.85, type: 'pop' }, { t: 3.0, type: 'pop' }];
 
 // ---------- 2: Warum – das Netz trennt die Geräte
 scene('why', (r, s) => {
@@ -84,20 +84,20 @@ scene('why', (r, s) => {
   s.n = net(r);
 }, (s, lt, D) => {
   drawWords(s.t, lt, 0.05, 0.08);
-  const kr = E.back(p(lt, 0.1, 0.5));
+  const kr = E.back(p(lt, 0.55, 0.5)); // „school networks“
   s.n.router.style.transform = `scale(${kr})`;
-  s.n.line(s.n.l.pr, 'phone', 'router', E.out(p(lt, 0.4, 0.5)), 'rgba(255,255,255,.35)');
-  s.n.line(s.n.l.lr, 'laptop', 'router', E.out(p(lt, 0.6, 0.5)), 'rgba(255,255,255,.35)');
+  s.n.line(s.n.l.pr, 'phone', 'router', E.out(p(lt, 0.85, 0.5)), 'rgba(255,255,255,.35)');
+  s.n.line(s.n.l.lr, 'laptop', 'router', E.out(p(lt, 1.05, 0.5)), 'rgba(255,255,255,.35)');
   s.n.line(s.n.l.pl, 'phone', 'laptop', 1, '#ff4d6d', '22 18');
   s.n.l.pl.style.opacity = 0.7;
-  const kw = E.back(p(lt, D * 0.45, 0.5));
+  const kw = E.back(p(lt, 1.6, 0.5)); // „keep devices apart“
   s.n.wall.style.transform = `translateY(${(1 - kw) * -200}px)`;
-  s.n.wall.style.opacity = p(lt, D * 0.45, 0.2);
-  s.n.x.style.opacity = p(lt, D * 0.6, 0.15);
+  s.n.wall.style.opacity = p(lt, 1.6, 0.2);
+  s.n.x.style.opacity = p(lt, 3.7, 0.15); // „can’t see“
   s.n.x.style.transform = 'translate(-6px,-110px) scale(.7)';
   s.n.rings.forEach((c) => (c.style.opacity = 0));
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: 0.1, type: 'pop' }, { t: D * 0.45, type: 'whoosh' }, { t: D * 0.6, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 0.55, type: 'pop' }, { t: 1.6, type: 'whoosh' }, { t: 3.7, type: 'pop' }];
 
 // ---------- 3: Die Lösung – Handy-Hotspot
 scene('fix', (r, s) => {
@@ -117,25 +117,26 @@ scene('fix', (r, s) => {
   s.n.l.pr.style.opacity = s.n.l.lr.style.opacity = 1 - out;
   s.n.wall.style.opacity = s.n.x.style.opacity = 1 - out;
   // Hotspot-Ringe am Handy
-  const hs = lt >= D * 0.3;
+  const HS = 2.6, CON = 3.5; // „hotspot“, „connect your laptop“
+  const hs = lt >= HS;
   s.n.rings.forEach((c, i) => {
-    const q = ((lt - D * 0.3) * 0.8 + i / 3) % 1;
+    const q = ((lt - HS) * 0.8 + i / 3) % 1;
     c.setAttribute('cx', NODES.phone[0]); c.setAttribute('cy', NODES.phone[1] - 10);
     c.setAttribute('r', 90 + q * 260);
     c.setAttribute('stroke', '#33c37a');
     c.style.opacity = hs ? (1 - q) * 0.7 : 0;
   });
-  const kc = E.back(p(lt, D * 0.32, 0.4));
-  s.chip.style.opacity = p(lt, D * 0.32, 0.2);
+  const kc = E.back(p(lt, HS + 0.15, 0.4));
+  s.chip.style.opacity = p(lt, HS + 0.15, 0.2);
   s.chip.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kc})`;
   // Laptop verbindet sich mit dem Handy
-  s.n.line(s.n.l.pl, 'laptop', 'phone', E.io(p(lt, D * 0.62, 0.5)), '#33c37a');
-  s.n.l.pl.style.opacity = lt >= D * 0.62 ? 1 : 0;
-  const ko = E.back(p(lt, D * 0.62 + 0.5, 0.4));
-  s.ok.style.opacity = p(lt, D * 0.62 + 0.5, 0.15);
+  s.n.line(s.n.l.pl, 'laptop', 'phone', E.io(p(lt, CON, 0.5)), '#33c37a');
+  s.n.l.pl.style.opacity = lt >= CON ? 1 : 0;
+  const ko = E.back(p(lt, CON + 0.5, 0.4));
+  s.ok.style.opacity = p(lt, CON + 0.5, 0.15);
   s.ok.style.transform = `scale(${0.4 + 0.6 * ko})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.32, type: 'pop' }, { t: D * 0.62, type: 'whoosh' }, { t: D * 0.62 + 0.5, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 2.75, type: 'pop' }, { t: 3.5, type: 'whoosh' }, { t: 4.0, type: 'pop' }];
 
 // ---------- 4: QR passt sich an → neu scannen → steuern
 scene('rescan', (r, s) => {
@@ -154,28 +155,29 @@ scene('rescan', (r, s) => {
   drawWords(s.t, lt, 0.05, 0.1);
   place(s.lap, { s: 1 });
   // QR-Code „aktualisiert sich“: kurzes Aufblitzen
-  s.lap.shot.style.filter = `brightness(${1 + 0.8 * Math.max(0, 1 - Math.abs(lt - 0.5) * 5)})`;
+  s.lap.shot.style.filter = `brightness(${1 + 0.8 * Math.max(0, 1 - Math.abs(lt - 1.4) * 5)})`;
   s.badge.style.opacity = p(lt, 0.4, 0.3);
   const kp = E.out(p(lt, 0.3, 0.6));
   s.ph.place(370, 950 + (1 - kp) * 400, 1);
-  const found = p(lt, D * 0.25, 0.25);
+  // Zeiten = gesprochene Wörter (aus words.py, Sekunden ab Szenenbeginn)
+  const found = p(lt, 3.2, 0.25); // „scan it again“
   s.cam.box.style.opacity = found;
-  s.cam.banner.style.opacity = p(lt, D * 0.35, 0.2);
-  tapAt(s.ph, 195, 108, lt - D * 0.45);
-  const sw = p(lt, D * 0.5, 0.3);
+  s.cam.banner.style.opacity = p(lt, 3.5, 0.2);
+  tapAt(s.ph, 195, 108, lt - 3.8);
+  const sw = p(lt, 4.0, 0.3); // „back in control“
   s.ph.alt.style.opacity = 1 - sw;
   s.ph.alt.style.display = sw < 1 ? 'block' : 'none';
-  const tNext = D * 0.62;
+  const tNext = 4.6;
   tapAt(s.ph, 242, 590, sw >= 1 ? lt - tNext : -9);
   pressBtn(s.ph.next, lt - tNext);
   showTimeline(s.lap.deck, lt, [{ t: tNext + 0.08, idx: 1 }]);
   showTimeline(s.ph.deck, lt, [{ t: tNext + 0.08, idx: 1 }]);
   s.lap.shot.style.display = lt >= tNext ? 'none' : 'block';
-  const kd = E.back(p(lt, D * 0.75, 0.4));
-  s.data.style.opacity = p(lt, D * 0.75, 0.2);
+  const kd = E.back(p(lt, 5.95, 0.4)); // „mobile data“
+  s.data.style.opacity = p(lt, 5.95, 0.2);
   s.data.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kd})`;
 });
-scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.25, type: 'pop' }, { t: D * 0.45, type: 'click' }, { t: D * 0.62 - 0.03, type: 'click' }, { t: D * 0.62 + 0.08, type: 'whoosh' }, { t: D * 0.75, type: 'pop' }];
+scenes[scenes.length - 1].sfx = () => [{ t: 3.2, type: 'pop' }, { t: 3.8, type: 'click' }, { t: 4.57, type: 'click' }, { t: 4.68, type: 'whoosh' }, { t: 5.95, type: 'pop' }];
 
 // ---------- 5: echte App + Link
 scene('cta', (r, s) => ctaScene(r, s, { vertical: true }), (s, lt) => ctaDraw(s, lt));

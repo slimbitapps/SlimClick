@@ -1,0 +1,119 @@
+1
+00:00:00,350 --> 00:00:00,909
+Picture this.
+
+2
+00:00:00,959 --> 00:00:04,141
+You're in front of the whole class, your slides are on the projector,
+
+3
+00:00:04,191 --> 00:00:07,000
+and for every new slide you have to walk back to your laptop.
+
+4
+00:00:08,000 --> 00:00:09,882
+Or you ask a friend to click for you,
+
+5
+00:00:09,932 --> 00:00:12,179
+and somehow they're always one slide behind.
+
+6
+00:00:13,200 --> 00:00:14,521
+That's why I built SlimClick.
+
+7
+00:00:14,571 --> 00:00:16,743
+It turns your phone into a presentation remote,
+
+8
+00:00:16,793 --> 00:00:18,730
+and you don't even have to install an app.
+
+9
+00:00:19,800 --> 00:00:23,988
+You open SlimClick on your laptop, scan the QR code with your phone's camera,
+
+10
+00:00:24,038 --> 00:00:25,144
+and a web page opens.
+
+11
+00:00:25,194 --> 00:00:26,189
+That's your remote.
+
+12
+00:00:27,199 --> 00:00:28,545
+Now you just tap next.
+
+13
+00:00:28,595 --> 00:00:32,539
+It works with PowerPoint, Keynote, Google Slides and even PDFs.
+
+14
+00:00:33,800 --> 00:00:36,631
+Your phone also shows a live preview of the current slide,
+
+15
+00:00:36,681 --> 00:00:39,960
+so you can face your audience and still know exactly where you are.
+
+16
+00:00:40,960 --> 00:00:42,359
+Want to point at something?
+
+17
+00:00:42,409 --> 00:00:44,346
+Turn on the laser, touch the preview,
+
+18
+00:00:44,396 --> 00:00:47,139
+and a red dot appears right there on the big screen.
+
+19
+00:00:47,189 --> 00:00:49,180
+The spotlight darkens everything else.
+
+20
+00:00:50,179 --> 00:00:51,411
+There's a timer as well.
+
+21
+00:00:51,461 --> 00:00:54,828
+A few minutes before the end, your phone screen flashes quietly,
+
+22
+00:00:54,878 --> 00:00:56,590
+so you never run over time again.
+
+23
+00:00:57,589 --> 00:00:59,701
+And if your school Wi-Fi blocks the connection,
+
+24
+00:00:59,751 --> 00:01:03,059
+SlimClick shows you step by step how to use your phone's hotspot instead.
+
+25
+00:01:04,790 --> 00:01:05,668
+It's also secure.
+
+26
+00:01:05,718 --> 00:01:08,564
+The QR code only works once, every command is signed,
+
+27
+00:01:08,614 --> 00:01:12,170
+and nobody else can take over your slides without your permission.
+
+28
+00:01:13,170 --> 00:01:17,475
+SlimClick is completely free for Windows and Mac, with no ads and no account.
+
+29
+00:01:17,525 --> 00:01:19,737
+You'll find the link in the description.
+
+30
+00:01:19,787 --> 00:01:21,886
+Good luck with your next presentation.
