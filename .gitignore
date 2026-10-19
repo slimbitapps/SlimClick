@@ -5,3 +5,4 @@ release/
 .DS_Store
 # Eigene Fotos/Dateien nie hochladen
 private/
+video-out/

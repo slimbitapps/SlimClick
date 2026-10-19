@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="style.css" />
+<style>html, body { width: 1080px; height: 1920px; }</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="../motion/core.js"></script>
+<script src="../motion/slimclick.js"></script>
+<script>
+// Short 2 – Laserpointer: auf die Vorschau tippen → roter Punkt auf dem Beamer. Dann Spotlight.
+const WALL = { x: 60, y: 300, w: 960 };
+const PH = { x: 370, y: 900, w: 340 };
+const PV = { x: 14, y: 112, w: 338, h: 211 }; // Vorschau im Handy (390er-Koordinaten)
+const TOOL = (i) => [14 + 87 * i + 39, 367];
+
+// ---------- 1: Hook – der alte Laserpointer fliegt raus
+scene('hook', (r, s) => {
+  s.t1 = headline(r, 'No laser pointer?', 120, 104);
+  s.t2 = headline(r, 'No problem.', 1650, 96);
+  s.t2.querySelectorAll('.word').forEach((w) => w.classList.add('grad'));
+  s.wall = screenWall(r, WALL);
+  s.wall.deck.show(1);
+  s.pen = el('div', 'abs', r, `<div style="width:70px;height:460px;border-radius:35px;background:linear-gradient(90deg,#9aa0aa,#e3e6ec 45%,#7d838d);box-shadow:0 30px 60px rgba(0,0,0,.6)">
+    <div style="position:absolute;left:22px;top:150px;width:26px;height:46px;border-radius:13px;background:#ff2d2d"></div></div>`);
+  css(s.pen, { left: '505px', top: '1080px', transformOrigin: '50% 0' });
+  s.beam = el('div', 'abs', r);
+  css(s.beam, { left: '539px', width: '4px', background: 'linear-gradient(0deg, rgba(255,45,45,.9), rgba(255,45,45,.2))', boxShadow: '0 0 14px rgba(255,45,45,.8)', transformOrigin: '50% 100%' });
+  s.x = el('div', 'abs', r, '✕');
+  css(s.x, { left: '430px', top: '1100px', fontSize: '330px', fontWeight: 900, color: '#ff4d6d', lineHeight: 1 });
+}, (s, lt, D) => {
+  drawWords(s.t1, lt, 0.05, 0.1);
+  drawWords(s.t2, lt, D * 0.6, 0.1);
+  // Zittriger Laserpunkt (so sieht es mit echten Pointern aus)
+  const u = 0.6 + 0.02 * Math.sin(lt * 23) + 0.015 * Math.sin(lt * 37), v = 0.45 + 0.02 * Math.cos(lt * 29);
+  const on = 1 - p(lt, D * 0.45, 0.2);
+  s.wall.laser(u, v, on);
+  const tx = WALL.x + u * WALL.w, ty = WALL.y + v * (WALL.w * 9 / 16);
+  const len = Math.hypot(tx - 541, 1080 - ty);
+  css(s.beam, { top: 1080 - len + 'px', height: len + 'px', opacity: on * 0.85, transform: `rotate(${Math.atan2(tx - 541, 1080 - ty) * 57.3}deg)` });
+  const kx = E.back(p(lt, D * 0.4, 0.3));
+  s.x.style.opacity = p(lt, D * 0.4, 0.1) * (1 - p(lt, D * 0.7, 0.2));
+  s.x.style.transform = `scale(${0.4 + 0.6 * kx})`;
+  const kf = E.in(p(lt, D * 0.62, 0.4));
+  s.pen.style.transform = `translateY(${kf * 900}px) rotate(${kf * 30}deg)`;
+  s.pen.style.opacity = 1 - kf;
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.4, type: 'pop' }, { t: D * 0.62, type: 'whoosh' }];
+
+// ---------- 2–4: Laser einschalten, zeigen, Spotlight
+scene('laser', (r, s) => {
+  s.titles = ['Turn on the laser', 'Touch = point', 'Spotlight'].map((t, i) => {
+    const h = headline(r, t, 120, 100);
+    if (i === 2) h.querySelectorAll('.word').forEach((w) => w.classList.add('grad'));
+    return h;
+  });
+  s.wall = screenWall(r, WALL);
+  s.wall.deck.show(1);
+  s.ph = phone(r, PH);
+  s.ph.deck.show(1);
+  s.mirror = el('div', 'chip', r, '📱 → 📽  same spot');
+  css(s.mirror, { left: '50%', top: '860px', fontSize: '36px', opacity: 0 });
+}, (s, lt, D) => {
+  const [o2, o3, o4] = s.pOff;
+  const L2 = o3 - o2, L3 = o4 - o3, L4 = D - o4;
+  const phase = lt < o3 ? 0 : lt < o4 ? 1 : 2;
+  s.titles.forEach((h, i) => {
+    drawWords(h, lt, s.pOff[i] + 0.05, 0.1);
+    h.style.opacity = phase === i ? 1 : 0;
+  });
+  const kin = E.back(p(lt, 0, 0.6));
+  s.ph.place(PH.x, PH.y + (1 - kin) * 700, 1, 0, p(lt, 0, 0.2));
+  // Werkzeug antippen
+  const tLaser = o2 + 0.4 * L2, tSpot = o4 + 0.12 * L4;
+  const laserOn = lt >= tLaser && lt < tSpot, spotOn = lt >= tSpot;
+  toolOn(s.ph, spotOn ? 1 : 0, laserOn || spotOn);
+  s.ph.ring.style.opacity = laserOn || spotOn ? 1 : 0;
+  // Fingerweg auf der Vorschau (u, v in 0..1)
+  let touch = null;
+  const tDown = o2 + 0.72 * L2;
+  if (laserOn && lt >= tDown) {
+    if (lt < o3) touch = [0.45, 0.55];
+    else {
+      const k = E.io(p(lt, o3, L3 * 0.9));
+      const a = k * Math.PI * 2.2;
+      touch = [lerp(0.45, 0.76, k) + 0.12 * Math.sin(a) * (1 - k), lerp(0.55, 0.37, k) + 0.1 * Math.sin(2 * a) * (1 - k)];
+    }
+    if (lt > o4 - 0.25) touch = null; // Finger hebt kurz vor dem Spotlight ab
+  }
+  let spot = null;
+  if (spotOn && lt >= tSpot + 0.5) {
+    const k = E.io(p(lt, tSpot + 0.5, L4 * 0.5));
+    spot = [lerp(0.3, 0.76, k), lerp(0.62, 0.37, k)];
+  }
+  const pt = touch || spot;
+  // Finger-Anzeige (bleibt sichtbar, solange er aufliegt)
+  if (pt) css(s.ph.tap, { left: PV.x + pt[0] * PV.w + 'px', top: PV.y + pt[1] * PV.h + 'px', opacity: 0.85, transform: 'scale(.8)' });
+  else {
+    const lastTap = lt >= tSpot ? tSpot : tLaser;
+    const [tx, ty] = TOOL(lt >= tSpot ? 1 : 0);
+    tapAt(s.ph, tx, ty, lt - lastTap);
+  }
+  phoneLaser(s.ph, ...(touch || [0, 0]), touch ? 1 : 0);
+  phoneSpot(s.ph, ...(spot || [0.5, 0.5]), spot ? 1 : 0);
+  s.wall.laser(...(touch || [0, 0]), touch ? 1 : 0);
+  s.wall.spotlight(...(spot || [0.5, 0.5]), spot ? E.out(p(lt, tSpot + 0.5, 0.3)) : 0);
+  s.mirror.style.opacity = phase === 1 ? p(lt, o3 + 0.3, 0.3) : 0;
+  s.mirror.style.transform = 'translateX(-50%)';
+}, 3);
+scenes[scenes.length - 1].sfx = function (D) {
+  const [o2, o3, o4] = this.pOff;
+  return [{ t: o2 + 0.4 * (o3 - o2) - 0.03, type: 'click' }, { t: o2 + 0.72 * (o3 - o2), type: 'pop' }, { t: o4 + 0.12 * (D - o4) - 0.03, type: 'click' }, { t: o4 + 0.12 * (D - o4) + 0.5, type: 'whoosh' }];
+};
+
+// ---------- 5: echte App + Link
+scene('cta', (r, s) => ctaScene(r, s, { vertical: true }), (s, lt) => ctaDraw(s, lt));
+
+start({ captionTop: 1700, captionSize: 64 });
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+Stell dir vor: Du stehst vor der ganzen Klasse, deine Folien laufen auf dem Beamer, und für jede neue Folie musst du zurück zu deinem Laptop laufen.
+
+Oder du bittest einen Freund, für dich zu klicken, und irgendwie ist er immer eine Folie zu spät.
+
+Genau deshalb habe ich SlimClick gebaut. Es macht dein Handy zur Präsentations-Fernbedienung, und du musst nicht mal eine App installieren.
+
+Du öffnest SlimClick auf deinem Laptop, scannst den QR-Code mit der Handy-Kamera, und eine Webseite öffnet sich. Das ist deine Fernbedienung.
+
+Jetzt tippst du einfach auf Weiter. Das klappt mit PowerPoint, Keynote, Google Slides und sogar mit PDFs.
+
+Dein Handy zeigt dir außerdem eine Live-Vorschau der aktuellen Folie. So kannst du zum Publikum schauen und weißt trotzdem genau, wo du bist.
+
+Du willst auf etwas zeigen? Schalte den Laser ein, tippe auf die Vorschau, und genau dort erscheint ein roter Punkt auf der Leinwand. Das Spotlight macht alles andere dunkel.
+
+Es gibt auch einen Timer. Ein paar Minuten vor dem Ende blinkt dein Handy-Bildschirm unauffällig, damit du nie wieder überziehst.
+
+Und falls dein Schul-WLAN die Verbindung blockiert, zeigt dir SlimClick Schritt für Schritt, wie du stattdessen den Hotspot deines Handys nutzt.
+
+Außerdem ist es sicher. Der QR-Code funktioniert nur einmal, jeder Befehl ist signiert, und niemand kann ohne deine Erlaubnis deine Folien steuern.
+
+SlimClick ist komplett kostenlos für Windows und Mac, ohne Werbung und ohne Konto. Den Link findest du in der Beschreibung. Viel Erfolg bei deiner nächsten Präsentation.

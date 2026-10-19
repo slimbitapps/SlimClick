@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../shorts/style.css" />
+<style>
+  html, body { width: 1920px; height: 1080px; }
+  .h2 { position: absolute; font-weight: 900; letter-spacing: -2px; line-height: 1.05; text-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  .bubble { position: absolute; padding: 22px 32px; border-radius: 30px; font-size: 40px; font-weight: 700; background: #fff; color: #111; box-shadow: 0 20px 50px rgba(0,0,0,.45); }
+  .card { position: absolute; width: 520px; padding: 26px 30px; border-radius: 24px; background: rgba(22,16,24,.92); border: 1px solid rgba(255,255,255,.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,.5); display: flex; gap: 22px; align-items: center; }
+  .card .ic { width: 84px; height: 84px; border-radius: 22px; display: grid; place-items: center; flex: none; font-size: 44px; background: rgba(255,77,109,.16); }
+  .card b { display: block; font-size: 34px; margin-bottom: 4px; }
+  .card span { font-size: 24px; color: #c9bfc8; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="../motion/core.js"></script>
+<script src="../motion/slimclick.js"></script>
+<script>
+// Intro (16:9, ~90 s). Ein Absatz des Sprechtexts = eine Szene. Ereignisse relativ zu Szenenlänge D.
+const WALL = { x: 110, y: 150, w: 1060 };
+const PHR = { x: 1370, y: 110, w: 350 }; // Handy rechts
+const PV = { x: 14, y: 112, w: 338, h: 211 };
+const TOOL = (i) => [14 + 87 * i + 39, 367];
+const h2 = (r, text, x, y, size, extra = {}) => { const e = words(r, text, { left: x + 'px', top: y + 'px', fontSize: size + 'px', ...extra }); e.className += ' h2'; return e; };
+const fadeUp = (e, lt, at, d = 0.4) => { const k = E.out(p(lt, at, d)); e.style.opacity = k; e.style.transform = `translateY(${(1 - k) * 30}px)`; };
+
+// ---------- 1: Der alte Weg – für jede Folie zurück zum Laptop laufen
+scene('walk', (r, s) => {
+  s.wall = screenWall(r, { x: 110, y: 130, w: 980 });
+  s.lap = laptop(r, 420, 1560, 520);
+  s.floor = el('div', 'abs', r);
+  css(s.floor, { left: '110px', right: '120px', top: '820px', height: '4px', borderRadius: '2px', background: 'rgba(255,255,255,.12)' });
+  s.me = el('div', 'abs', r, '🚶');
+  css(s.me, { top: '700px', fontSize: '120px' });
+  s.count = el('div', 'chip', r, '');
+  css(s.count, { left: '1360px', top: '140px', fontSize: '40px' });
+}, (s, lt, D) => {
+  // Hin und zurück laufen; an der Laptop-Seite wechselt die Folie
+  const trip = 3.2;
+  const q = (lt % trip) / trip, n = Math.floor(lt / trip);
+  const toLap = q < 0.5;
+  const k = E.io(toLap ? q / 0.5 : (q - 0.5) / 0.5);
+  const x = toLap ? lerp(560, 1380, k) : lerp(1380, 560, k);
+  css(s.me, { left: x + 'px', transform: `scaleX(${toLap ? -1 : 1}) translateY(${-Math.abs(Math.sin(lt * 9)) * 12}px)` });
+  const changes = [];
+  for (let i = 0; i <= n; i++) changes.push({ t: i * trip + trip * 0.5, idx: i + 1 });
+  showTimeline(s.wall.deck, lt, changes);
+  showTimeline(s.lap.deck, lt, changes);
+  place(s.lap, { s: 1 });
+  const done = changes.filter((c) => lt >= c.t).length;
+  s.count.innerHTML = `🚶 walks: <span class="grad">${done}</span>`;
+  fadeUp(s.count, lt, 0.4);
+});
+scenes[scenes.length - 1].sfx = (D) => { const o = []; for (let t = 1.6; t < D; t += 3.2) o.push({ t: t - 0.03, type: 'click' }, { t: t + 0.05, type: 'whoosh' }); return o; };
+
+// ---------- 2: Freund klickt – immer eine Folie zu spät
+scene('friend', (r, s) => {
+  s.wall = screenWall(r, { x: 480, y: 120, w: 960 });
+  s.b1 = el('div', 'bubble', r, 'Next slide, please!');
+  css(s.b1, { left: '140px', top: '640px' });
+  s.b2 = el('div', 'bubble', r, '…wait, which one? 😅');
+  css(s.b2, { right: '140px', top: '700px', background: '#2a2430', color: '#fff' });
+  s.lag = el('div', 'chip', r, '🐢 always one slide behind');
+  css(s.lag, { left: '50%', top: '820px', fontSize: '40px' });
+}, (s, lt, D) => {
+  fadeUp(s.b1, lt, 0.3);
+  fadeUp(s.b2, lt, D * 0.35);
+  showTimeline(s.wall.deck, lt, [{ t: D * 0.6, idx: 2 }], 1);
+  const k = E.back(p(lt, D * 0.62, 0.4));
+  s.lag.style.opacity = p(lt, D * 0.62, 0.2);
+  s.lag.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * k})`;
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: 0.3, type: 'pop' }, { t: D * 0.35, type: 'pop' }, { t: D * 0.6, type: 'whoosh' }];
+
+// ---------- 3: SlimClick – Logo
+scene('logo', (r, s) => {
+  s.icon = el('img', 'abs', r);
+  s.icon.src = ICON;
+  css(s.icon, { left: '820px', top: '150px', width: '280px', height: '280px' });
+  s.name = el('div', 'abs head', r, 'Slim<span class="grad">Click</span>');
+  css(s.name, { top: '450px', fontSize: '170px', letterSpacing: '-5px' });
+  s.tag = h2(r, 'Your phone is the remote.', 0, 660, 64, { left: 0, right: 0, textAlign: 'center' });
+  s.noapp = el('div', 'chip', r, '✕ no app to install');
+  css(s.noapp, { left: '50%', top: '790px', fontSize: '40px', color: '#ffd3dc' });
+}, (s, lt, D) => {
+  const k = E.back(p(lt, 0.1, 0.7));
+  s.icon.style.transform = `scale(${k}) rotate(${(1 - k) * -20}deg)`;
+  fadeUp(s.name, lt, 0.5, 0.5);
+  drawWords(s.tag, lt, D * 0.3, 0.1);
+  const kn = E.back(p(lt, D * 0.62, 0.4));
+  s.noapp.style.opacity = p(lt, D * 0.62, 0.2);
+  s.noapp.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kn})`;
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: 0.1, type: 'whoosh' }, { t: 0.55, type: 'pop' }, { t: D * 0.62, type: 'pop' }];
+
+// ---------- 4: QR-Code scannen
+scene('scan', (r, s) => {
+  s.lap = laptop(r, 1000, 680, 500);
+  s.lap.useShot('10-home-qr');
+  s.ph = phone(r, PHR);
+  s.ph.alt.style.display = 'block';
+  s.cam = cameraView(s.ph);
+  s.ph.deck.show(0);
+  s.steps = ['① Open SlimClick', '② Scan with camera', '③ That’s your remote'].map((t, i) => {
+    const c = el('div', 'chip', r, t);
+    css(c, { left: 180 + i * 360 + 'px', top: '860px', fontSize: '32px' });
+    return c;
+  });
+}, (s, lt, D) => {
+  const k = E.out(p(lt, 0, 0.6));
+  place(s.lap, { s: 0.95 + 0.05 * k });
+  const kp = E.out(p(lt, D * 0.15, 0.6));
+  s.ph.place(PHR.x, PHR.y + (1 - kp) * 300, 1, 4 * (1 - kp), p(lt, D * 0.15, 0.2));
+  const found = p(lt, D * 0.4, 0.25);
+  s.cam.box.style.opacity = found;
+  s.cam.banner.style.opacity = p(lt, D * 0.5, 0.2);
+  tapAt(s.ph, 195, 108, lt - D * 0.62);
+  const sw = p(lt, D * 0.7, 0.3);
+  s.ph.alt.style.opacity = 1 - sw;
+  s.ph.alt.style.display = sw < 1 ? 'block' : 'none';
+  [0.05, 0.4, 0.72].forEach((at, i) => fadeUp(s.steps[i], lt, D * at));
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.4, type: 'pop' }, { t: D * 0.62, type: 'click' }, { t: D * 0.72, type: 'pop' }];
+
+// ---------- 5: Weiter tippen – in jedem Programm
+const APPS = [['PowerPoint', '#c43e1c'], ['Keynote', '#1a73e8'], ['Google Slides', '#f4b400'], ['PDF', '#e5252a']];
+scene('tap', (r, s) => {
+  s.wall = screenWall(r, WALL);
+  s.ph = phone(r, PHR);
+  s.apps = APPS.map(([n, c], i) => {
+    const a = el('div', 'app', r, n);
+    css(a, { background: c, left: 140 + i * 260 + 'px', top: '780px', color: n === 'Google Slides' ? '#222' : '#fff', fontSize: '30px' });
+    return a;
+  });
+}, (s, lt, D) => {
+  if (!s.taps) {
+    s.taps = [0.12, 0.32, 0.52, 0.72].map((k) => k * D);
+    s.changes = s.taps.map((t, i) => ({ t: t + 0.08, idx: i + 1 }));
+  }
+  showTimeline(s.wall.deck, lt, s.changes);
+  showTimeline(s.ph.deck, lt, s.changes);
+  const last = [...s.taps].reverse().find((t) => lt >= t - 0.12);
+  const since = last !== undefined ? lt - last : -9;
+  tapAt(s.ph, 242, 590, since);
+  pressBtn(s.ph.next, since);
+  s.apps.forEach((a, i) => {
+    const at = D * (0.35 + i * 0.1);
+    const k = E.back(p(lt, at, 0.4));
+    a.style.opacity = p(lt, at, 0.15);
+    a.style.transform = `scale(${0.6 + 0.4 * k})`;
+  });
+});
+scenes[scenes.length - 1].sfx = function (D) { this.draw(this, 0, D); return this.taps.flatMap((t) => [{ t: t - 0.03, type: 'click' }, { t: t + 0.08, type: 'whoosh' }]); };
+
+// ---------- 6: Live-Vorschau
+scene('preview', (r, s) => {
+  s.ph = phone(r, { x: 1180, y: 120, w: 380 });
+  s.ph.deck.show(2);
+  s.t1 = h2(r, 'Face your audience.', 160, 280, 92);
+  s.t2 = h2(r, 'Still know every slide.', 160, 400, 92);
+  s.t2.querySelectorAll('.word').forEach((w) => w.classList.add('grad'));
+  s.lbl = el('div', 'chip', r, '👀 Live preview');
+  css(s.lbl, { left: '160px', top: '580px', fontSize: '40px' });
+}, (s, lt, D) => {
+  const z = E.io(p(lt, 0, 0.8));
+  s.ph.place(1180, 120 + (1 - z) * 200, 1 + 0.05 * Math.sin(lt * 0.8));
+  s.ph.ring.style.opacity = p(lt, 0.8, 0.3) * (0.6 + 0.4 * Math.sin(lt * 5));
+  showTimeline(s.ph.deck, lt, [{ t: D * 0.6, idx: 3 }], 2);
+  drawWords(s.t1, lt, 0.2, 0.1);
+  drawWords(s.t2, lt, D * 0.4, 0.1);
+  fadeUp(s.lbl, lt, 0.9);
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: 0.9, type: 'pop' }, { t: D * 0.6, type: 'whoosh' }];
+
+// ---------- 7: Laserpointer + Spotlight
+scene('laser', (r, s) => {
+  s.wall = screenWall(r, WALL);
+  s.wall.deck.show(1);
+  s.ph = phone(r, PHR);
+  s.ph.deck.show(1);
+  s.lbl = el('div', 'chip', r, '');
+  css(s.lbl, { left: '140px', top: '800px', fontSize: '38px' });
+}, (s, lt, D) => {
+  const tLaser = D * 0.12, tDown = D * 0.22, tSpot = D * 0.68;
+  const laserOn = lt >= tLaser && lt < tSpot, spotOn = lt >= tSpot;
+  toolOn(s.ph, spotOn ? 1 : 0, laserOn || spotOn);
+  s.ph.ring.style.opacity = laserOn || spotOn ? 1 : 0;
+  let touch = null, spot = null;
+  if (laserOn && lt >= tDown && lt < tSpot - 0.25) {
+    const k = E.io(p(lt, tDown, (tSpot - tDown) * 0.85));
+    const a = k * Math.PI * 2.2;
+    touch = [lerp(0.4, 0.76, k) + 0.12 * Math.sin(a) * (1 - k), lerp(0.6, 0.37, k) + 0.1 * Math.sin(2 * a) * (1 - k)];
+  }
+  if (spotOn && lt >= tSpot + 0.4) {
+    const k = E.io(p(lt, tSpot + 0.4, (D - tSpot) * 0.5));
+    spot = [lerp(0.3, 0.76, k), lerp(0.6, 0.37, k)];
+  }
+  const pt = touch || spot;
+  if (pt) css(s.ph.tap, { left: PV.x + pt[0] * PV.w + 'px', top: PV.y + pt[1] * PV.h + 'px', opacity: 0.85, transform: 'scale(.8)' });
+  else { const at = lt >= tSpot ? tSpot : tLaser; const [tx, ty] = TOOL(lt >= tSpot ? 1 : 0); tapAt(s.ph, tx, ty, lt - at); }
+  phoneLaser(s.ph, ...(touch || [0, 0]), touch ? 1 : 0);
+  phoneSpot(s.ph, ...(spot || [0.5, 0.5]), spot ? 1 : 0);
+  s.wall.laser(...(touch || [0, 0]), touch ? 1 : 0);
+  s.wall.spotlight(...(spot || [0.5, 0.5]), spot ? E.out(p(lt, tSpot + 0.4, 0.3)) : 0);
+  s.lbl.innerHTML = spotOn ? '◉ Spotlight' : '● Laser – touch the preview';
+  s.lbl.style.opacity = p(lt, tLaser, 0.3);
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.12 - 0.03, type: 'click' }, { t: D * 0.22, type: 'pop' }, { t: D * 0.68 - 0.03, type: 'click' }, { t: D * 0.68 + 0.4, type: 'whoosh' }];
+
+// ---------- 8: Timer mit leiser Warnung
+scene('timer', (r, s) => {
+  s.ph = phone(r, { x: 1180, y: 120, w: 380 });
+  s.ph.deck.show(3);
+  s.big = el('div', 'abs', r);
+  css(s.big, { left: '160px', top: '240px', fontSize: '220px', fontWeight: 900, letterSpacing: '-6px', fontVariantNumeric: 'tabular-nums' });
+  s.t = h2(r, 'left – your screen flashes', 170, 500, 54, { color: '#e9dfe8' });
+  s.quiet = el('div', 'chip', r, '🤫 Only you notice');
+  css(s.quiet, { left: '170px', top: '620px', fontSize: '40px' });
+}, (s, lt, D) => {
+  // 5:03 → 4:5x: bei 5:00 blitzt der Bildschirm gelb auf
+  const remain = 303 - lt * 1.2;
+  const mm = Math.floor(remain / 60), ss = Math.floor(remain % 60);
+  const txt = `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+  s.big.textContent = txt;
+  s.ph.timer.textContent = txt;
+  const flashAt = 3 / 1.2;
+  const f = lt >= flashAt ? Math.max(0, Math.sin(((lt - flashAt) / 1.4) * Math.PI * 3)) * (1 - p(lt, flashAt + 1.3, 0.2)) : 0;
+  s.ph.flash.style.background = '#f6b03c';
+  s.ph.flash.style.opacity = f * 0.6;
+  s.big.style.color = lt >= flashAt ? '#f6b03c' : '#fff';
+  s.ph.timer.style.color = lt >= flashAt ? '#f6b03c' : '#fff';
+  const k = E.io(p(lt, 0, 0.7));
+  s.ph.place(1180, 120 + (1 - k) * 200, 1);
+  drawWords(s.t, lt, 0.4, 0.08);
+  fadeUp(s.quiet, lt, flashAt + 0.6);
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: 3 / 1.2, type: 'pop' }];
+
+// ---------- 9: Schul-WLAN → Hotspot
+const NODES = { phone: [600, 620], laptop: [1320, 620], router: [960, 260] };
+scene('wifi', (r, s) => {
+  s.svg = el('div', 'abs', r);
+  css(s.svg, { inset: 0 });
+  s.svg.innerHTML = `<svg width="1920" height="1080" style="position:absolute;inset:0"><line id="a" stroke-width="8" stroke-linecap="round"/><line id="b" stroke-width="8" stroke-linecap="round"/><line id="c" stroke-width="10" stroke-linecap="round"/><circle id="r1" fill="none" stroke-width="5"/><circle id="r2" fill="none" stroke-width="5"/><circle id="r3" fill="none" stroke-width="5"/></svg>`;
+  const q = (id) => s.svg.querySelector('#' + id);
+  s.L = { a: q('a'), b: q('b'), c: q('c') };
+  s.rings = [q('r1'), q('r2'), q('r3')];
+  const node = (key, ic, lb) => { const n = el('div', 'node', r, `<div class="ic">${ic}</div><div>${lb}</div>`); css(n, { left: NODES[key][0] - 140 + 'px', top: NODES[key][1] - 100 + 'px', width: '280px' }); return n; };
+  s.router = node('router', '📡', 'School Wi-Fi');
+  s.phoneN = node('phone', '📱', 'Your phone');
+  s.lapN = node('laptop', '💻', 'Your laptop');
+  s.x = el('div', 'abs', r, '✕');
+  css(s.x, { left: '915px', top: '540px', fontSize: '130px', fontWeight: 900, color: '#ff4d6d', lineHeight: 1 });
+  s.chip = el('div', 'chip', r, '📶 Hotspot ON · 0 MB data');
+  css(s.chip, { left: '50%', top: '800px', fontSize: '40px', color: '#7ef0a8' });
+  s.line = (ln, a, b, k, color, dash = '') => {
+    const [x1, y1] = NODES[a], [x2, y2] = NODES[b];
+    ln.setAttribute('x1', x1); ln.setAttribute('y1', y1); ln.setAttribute('x2', lerp(x1, x2, k)); ln.setAttribute('y2', lerp(y1, y2, k));
+    ln.setAttribute('stroke', color); ln.setAttribute('stroke-dasharray', dash);
+  };
+}, (s, lt, D) => {
+  const fix = D * 0.5;
+  const out = p(lt, fix, 0.5);
+  s.line(s.L.a, 'phone', 'router', E.out(p(lt, 0.2, 0.5)), 'rgba(255,255,255,.35)');
+  s.line(s.L.b, 'laptop', 'router', E.out(p(lt, 0.4, 0.5)), 'rgba(255,255,255,.35)');
+  s.L.a.style.opacity = s.L.b.style.opacity = 1 - out;
+  s.router.style.opacity = 1 - out;
+  const blocked = lt < fix;
+  s.line(s.L.c, blocked ? 'phone' : 'laptop', blocked ? 'laptop' : 'phone', blocked ? 1 : E.io(p(lt, fix + 0.6, 0.5)), blocked ? '#ff4d6d' : '#33c37a', blocked ? '22 18' : '');
+  s.L.c.style.opacity = blocked ? 0.7 * p(lt, 0.8, 0.3) : lt >= fix + 0.6 ? 1 : 0;
+  const kx = E.back(p(lt, 1.0, 0.35));
+  s.x.style.opacity = p(lt, 1.0, 0.1) * (1 - out);
+  s.x.style.transform = `scale(${0.5 + 0.5 * kx})`;
+  s.rings.forEach((c, i) => {
+    const q = ((lt - fix) * 0.8 + i / 3) % 1;
+    c.setAttribute('cx', NODES.phone[0]); c.setAttribute('cy', NODES.phone[1]); c.setAttribute('r', 110 + q * 300); c.setAttribute('stroke', '#33c37a');
+    c.style.opacity = lt >= fix ? (1 - q) * 0.7 : 0;
+  });
+  const kc = E.back(p(lt, fix + 1.0, 0.4));
+  s.chip.style.opacity = p(lt, fix + 1.0, 0.2);
+  s.chip.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * kc})`;
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: 1.0, type: 'pop' }, { t: D * 0.5 + 0.6, type: 'whoosh' }, { t: D * 0.5 + 1.0, type: 'pop' }];
+
+// ---------- 10: Sicherheit
+scene('secure', (r, s) => {
+  s.cards = [['🔑', 'QR code works once', 'A photo of it is useless'], ['✍️', 'Every command is signed', 'Nobody on the Wi-Fi can fake one'], ['🙋', 'You approve new devices', 'Classmates can’t take over']].map(([ic, b, t], i) => {
+    const c = el('div', 'card', r, `<div class="ic">${ic}</div><div><b>${b}</b><span>${t}</span></div>`);
+    css(c, { left: '140px', top: 170 + i * 200 + 'px' });
+    return c;
+  });
+  s.shot = el('img', 'abs', r);
+  s.shot.src = SHOT('13-approval');
+  css(s.shot, { left: '800px', top: '170px', width: '980px', borderRadius: '20px', boxShadow: '0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08)' });
+}, (s, lt, D) => {
+  s.cards.forEach((c, i) => {
+    const at = D * (0.08 + i * 0.27);
+    const k = E.back(p(lt, at, 0.45));
+    c.style.opacity = p(lt, at, 0.2);
+    c.style.transform = `translateX(${(1 - k) * -80}px)`;
+  });
+  const k = E.out(p(lt, D * 0.55, 0.6));
+  s.shot.style.opacity = k;
+  s.shot.style.transform = `perspective(2000px) rotateY(${-14 * (1 - k)}deg) scale(${0.92 + 0.08 * k})`;
+});
+scenes[scenes.length - 1].sfx = (D) => [0.08, 0.35, 0.62].map((k) => ({ t: D * k, type: 'pop' }));
+
+// ---------- 11: echte App + Link
+scene('cta', (r, s) => ctaScene(r, s, { vertical: false, link: 'Link in description ↓' }), (s, lt) => ctaDraw(s, lt, false));
+
+start({ captionTop: 935, captionSize: 50 });
+</script>
+</body>
+</html>

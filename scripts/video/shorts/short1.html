@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="style.css" />
+<style>html, body { width: 1080px; height: 1920px; }</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="../motion/core.js"></script>
+<script src="../motion/slimclick.js"></script>
+<script>
+// Short 1 – „Clicker vergessen? Nimm dein Handy.“ Prinzip: QR scannen → tippen → Folie wechselt.
+
+// ---------- 1: Hook – der vergessene Presenter
+scene('hook', (r, s) => {
+  s.t1 = headline(r, 'Forgot your clicker?', 150, 104);
+  s.t2 = headline(r, 'Use your phone.', 290, 104);
+  s.t2.querySelectorAll('.word').forEach((w) => w.classList.add('grad'));
+  // Presenter (Clicker) als Grafik
+  s.clicker = el('div', 'abs', r, `<div style="width:150px;height:420px;border-radius:75px;background:linear-gradient(180deg,#3a3d45,#1d1f24);box-shadow:0 40px 80px rgba(0,0,0,.6),inset 0 0 0 3px #4a4e57;position:relative">
+    <div style="position:absolute;left:35px;top:60px;width:80px;height:80px;border-radius:50%;background:#2a2d33;box-shadow:inset 0 0 0 3px #555"></div>
+    <div style="position:absolute;left:35px;top:170px;width:80px;height:80px;border-radius:50%;background:#2a2d33;box-shadow:inset 0 0 0 3px #555"></div>
+    <div style="position:absolute;left:62px;top:300px;width:26px;height:26px;border-radius:50%;background:#ff2d2d;box-shadow:0 0 20px #ff2d2d"></div></div>`);
+  css(s.clicker, { left: '465px', top: '700px' });
+  s.x = el('div', 'abs', r, '✕');
+  css(s.x, { left: '390px', top: '690px', fontSize: '420px', fontWeight: 900, color: '#ff4d6d', lineHeight: 1, textShadow: '0 20px 60px rgba(0,0,0,.6)' });
+  s.ph = phone(r, { x: 330, y: 560, w: 420 });
+  s.ph.deck.show(0);
+}, (s, lt, D) => {
+  drawWords(s.t1, lt, 0.05, 0.1);
+  drawWords(s.t2, lt, D * 0.55, 0.1);
+  const kx = E.back(p(lt, 0.55, 0.35));
+  s.x.style.opacity = p(lt, 0.55, 0.15) * (1 - p(lt, D * 0.5, 0.3));
+  s.x.style.transform = `scale(${0.5 + 0.5 * kx}) rotate(${-10 + 10 * kx}deg)`;
+  const kc = E.in(p(lt, D * 0.48, 0.45));
+  s.clicker.style.transform = `translateY(${kc * 900}px) rotate(${kc * 40}deg)`;
+  s.clicker.style.opacity = 1 - kc;
+  const kp = E.back(p(lt, D * 0.55, 0.6));
+  s.ph.place(330, 560 + (1 - kp) * 1100, 1, (1 - kp) * 12, p(lt, D * 0.55, 0.2));
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: 0.55, type: 'pop' }, { t: D * 0.48, type: 'whoosh' }, { t: D * 0.6, type: 'whoosh' }];
+
+// ---------- 2: QR-Code scannen – keine App nötig
+scene('scan', (r, s) => {
+  s.t = headline(r, 'Scan. No app.', 130, 96);
+  s.lap = laptop(r, 860, 540, 600);
+  s.lap.useShot('10-home-qr');
+  s.ph = phone(r, { x: 370, y: 950, w: 340 });
+  s.ph.alt.style.display = 'block';
+  s.cam = cameraView(s.ph);
+  s.ph.deck.show(0);
+  s.ok = el('div', 'chip', r, '✓ Connected');
+  css(s.ok, { left: '50%', top: '1690px', color: '#7ef0a8' });
+}, (s, lt, D) => {
+  drawWords(s.t, lt, 0.05, 0.12);
+  const k = E.out(p(lt, 0, 0.6));
+  place(s.lap, { s: 0.94 + 0.06 * k, y: 30 * (1 - k) });
+  // Handy fährt hoch und zielt auf den QR-Code
+  const kp = E.out(p(lt, 0.2, 0.7));
+  s.ph.place(370, 950 + (1 - kp) * 400, 1, -6 * (1 - kp) + 2 * Math.sin(lt * 1.3) * (1 - p(lt, D * 0.6, 0.3)));
+  const found = p(lt, D * 0.32, 0.25);
+  s.cam.box.style.opacity = found;
+  s.cam.box.style.transform = `scale(${1.25 - 0.25 * E.out(found)})`;
+  s.cam.banner.style.opacity = p(lt, D * 0.48, 0.25);
+  s.cam.banner.style.transform = `translateY(${(1 - E.out(p(lt, D * 0.48, 0.3))) * -30}px)`;
+  tapAt(s.ph, 195, 108, lt - D * 0.62);
+  // Kamera → Fernbedienung
+  const sw = p(lt, D * 0.68, 0.3);
+  s.ph.alt.style.opacity = 1 - sw;
+  s.ph.alt.style.display = sw < 1 ? 'block' : 'none';
+  const ko = E.back(p(lt, D * 0.74, 0.4));
+  s.ok.style.opacity = p(lt, D * 0.74, 0.2);
+  s.ok.style.transform = `translateX(-50%) scale(${0.6 + 0.4 * ko})`;
+});
+scenes[scenes.length - 1].sfx = (D) => [{ t: D * 0.32, type: 'pop' }, { t: D * 0.62, type: 'click' }, { t: D * 0.74, type: 'pop' }];
+
+// ---------- 3+4: Tippen → Folie wechselt, überall; dann die Live-Vorschau
+const APPS = [['PowerPoint', '#c43e1c'], ['Keynote', '#1a73e8'], ['Google Slides', '#f4b400'], ['PDF', '#e5252a']];
+scene('tap', (r, s) => {
+  s.t1 = headline(r, 'Tap. Next slide.', 130, 96);
+  s.t2 = headline(r, 'Live preview', 130, 96);
+  s.t2.querySelectorAll('.word').forEach((w) => w.classList.add('grad'));
+  s.lap = laptop(r, 860, 540, 600);
+  s.ph = phone(r, { x: 370, y: 950, w: 340 });
+  s.apps = APPS.map(([n, c], i) => {
+    const a = el('div', 'app', r, n);
+    css(a, { background: c, top: 1000 + i * 120 + 'px', left: i % 2 ? '740px' : '60px', color: n === 'Google Slides' ? '#222' : '#fff' });
+    return a;
+  });
+  s.pvLbl = el('div', 'chip', r, '👀 = what the class sees');
+  css(s.pvLbl, { left: '50%', top: '880px', fontSize: '38px' });
+}, (s, lt, D) => {
+  const [o3, o4] = s.pOff;
+  const L3 = o4 - o3;
+  if (!s.taps) {
+    s.taps = [0.12, 0.34, 0.56, 0.78].map((k) => o3 + k * L3);
+    s.changes = s.taps.map((t, i) => ({ t: t + 0.08, idx: i + 1 }));
+  }
+  const ph3 = lt < o4;
+  drawWords(s.t1, lt, 0.05, 0.1);
+  s.t1.style.opacity = ph3 ? 1 : 1 - p(lt, o4, 0.2);
+  drawWords(s.t2, lt, o4 + 0.1, 0.1);
+  s.t2.style.opacity = ph3 ? 0 : 1;
+  const idx = showTimeline(s.lap.deck, lt, s.changes);
+  showTimeline(s.ph.deck, lt, s.changes);
+  const last = [...s.taps].reverse().find((t) => lt >= t - 0.12);
+  tapAt(s.ph, 242, 590, last !== undefined ? lt - last : -9);
+  pressBtn(s.ph.next, last !== undefined ? lt - last : -9);
+  place(s.lap, { s: 1 });
+  // App-Namen tauchen auf
+  s.apps.forEach((a, i) => {
+    const at = o3 + (0.15 + i * 0.18) * L3;
+    const k = E.back(p(lt, at, 0.4));
+    a.style.opacity = ph3 ? p(lt, at, 0.15) : 1 - p(lt, o4, 0.25);
+    a.style.transform = `scale(${0.6 + 0.4 * k}) rotate(${(i % 2 ? 4 : -4) * (1 - k)}deg)`;
+  });
+  // Absatz 4: Handy holt die Vorschau groß nach vorne
+  const z = E.io(p(lt, o4 + 0.2, 0.7));
+  s.ph.place(370 - 85 * z, 950 - 520 * z, 1 + 0.5 * z);
+  s.ph.ring.style.opacity = z * (0.6 + 0.4 * Math.sin(lt * 6));
+  s.lap.win.style.opacity = 1 - 0.75 * z;
+  s.pvLbl.style.opacity = p(lt, o4 + 0.8, 0.3);
+  s.pvLbl.style.transform = `translateX(-50%) translateY(${(1 - E.out(p(lt, o4 + 0.8, 0.4))) * 30}px)`;
+  css(s.pvLbl, { top: 270 + 'px' });
+  void idx;
+}, 2);
+scenes[scenes.length - 1].sfx = function (D) {
+  this.draw(this, 0, D);
+  return this.taps.flatMap((t) => [{ t: t - 0.03, type: 'click' }, { t: t + 0.08, type: 'whoosh' }]).concat([{ t: this.pOff[1] + 0.2, type: 'whoosh' }]);
+};
+
+// ---------- 5: echte App + Link
+scene('cta', (r, s) => ctaScene(r, s, { vertical: true }), (s, lt) => ctaDraw(s, lt));
+
+start({ captionTop: 1700, captionSize: 64 });
+</script>
+</body>
+</html>
