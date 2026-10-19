@@ -1,0 +1,82 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #101114;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+}
+#deck,
+.slide {
+  height: 100%;
+}
+.slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 9vw;
+  background: radial-gradient(120% 90% at 90% 10%, color-mix(in srgb, var(--c) 55%, transparent), transparent 60%), #14151a;
+  animation: in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+.slide h1 {
+  font-size: clamp(32px, 7vw, 84px);
+  margin: 0 0 0.3em;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.slide p {
+  font-size: clamp(16px, 2.4vw, 30px);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 30em;
+}
+.num {
+  position: absolute;
+  top: 4vh;
+  left: 9vw;
+  font-size: clamp(12px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--c);
+}
+.hint {
+  position: absolute;
+  bottom: 3.5vh;
+  left: 9vw;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+}
+.target {
+  position: absolute;
+  right: 12vw;
+  bottom: 18vh;
+  width: 14vmin;
+  height: 14vmin;
+  border-radius: 50%;
+  border: 0.8vmin dashed var(--c);
+}
+.blank {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 14px;
+}
+.blank.white {
+  background: #fff;
+}
+.blank[hidden] {
+  display: none;
+}
