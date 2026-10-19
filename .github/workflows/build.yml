@@ -14,7 +14,7 @@ on:
     branches: [main]
     tags: ['v*']
     # Nur Texte/Webseiten/Videos geändert → keine neuen Installer bauen
-    paths-ignore: ['website/**', 'brand/**', 'docs/**', 'marketing/**', '**/*.md', '.github/workflows/pages.yml', '.gitignore']
+    paths-ignore: ['website/**', 'brand/**', 'docs/**', 'marketing/**', 'scripts/video/**', 'scripts/store-shots.cjs', '**/*.md', '.github/workflows/pages.yml', '.gitignore']
   workflow_dispatch:
 
 jobs:
