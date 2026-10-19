@@ -50,7 +50,7 @@ export const it: Dict = {
   'onb.tour.2.title': 'Avvia la presentazione',
   'onb.tour.2.text': 'PowerPoint, Keynote, Google Slides o PDF, a schermo intero.',
   'onb.tour.3.title': 'Tocca Avanti',
-  'onb.tour.3.text': 'Cambia slide, puntatore laser, timer con vibrazione: tutto sul telefono.',
+  'onb.tour.3.text': 'Cambia slide, puntatore laser, timer: tutto sul telefono.',
   'onb.safe': 'Sicuro: solo il tuo telefono può controllare. Tutto resta nella tua Wi-Fi.',
   'onb.start': 'Iniziamo',
 
@@ -105,7 +105,7 @@ export const it: Dict = {
   'timer.countdown': 'Conto alla rovescia',
   'timer.stopwatch': 'Cronometro',
   'timer.minutes': '{n} min',
-  'timer.hint': 'Il telefono vibra quando mancano 5, 2 e 1 minuto e alla fine (Android). Sull’iPhone lo schermo lampeggia.',
+  'timer.hint': 'Lo schermo del telefono lampeggia in giallo quando mancano 5, 2 e 1 minuto e in rosso alla fine, senza che il pubblico se ne accorga.',
 
   'net.wifi': 'Wi-Fi',
   'net.ethernet': 'Cavo di rete',
@@ -208,8 +208,8 @@ export const it: Dict = {
   'faq.5.a': 'SlimClick tiene acceso lo schermo appena tocchi una volta. Se si spegne comunque, sbloccalo: la connessione torna da sola.',
   'faq.6.q': 'SlimClick ha bisogno di Internet o di dati mobili?',
   'faq.6.a': 'No. Tutto passa direttamente tra telefono e portatile. Nessun account, nessun cloud, nessuna raccolta di dati.',
-  'faq.7.q': 'Perché il mio iPhone non vibra?',
-  'faq.7.a': 'Apple non permette ai siti web di far vibrare. Per questo sull’iPhone lo schermo lampeggia con il timer. I telefoni Android vibrano.',
+  'faq.7.q': 'Come capisco che il tempo sta per finire?',
+  'faq.7.a': 'Lo schermo del telefono lampeggia in giallo quando mancano 5, 2 e 1 minuto e in rosso alla fine. In alto vedi il tempo rimasto. Gli avvisi si impostano nel timer del telefono.',
   'faq.8.q': 'Il puntatore laser è sullo schermo sbagliato.',
   'faq.8.a': 'Impostazioni → Puntatore laser → Schermo. Scegli il proiettore.',
 

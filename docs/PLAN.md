@@ -23,7 +23,7 @@ Vor der Veröffentlichung kurz im DPMA-Register (`register.dpma.de`) nach „Sli
 - Weiter/Zurück (große Knöpfe + Wischen), Gehe zu Folie, Schwarz/Weiß, Präsentation starten/beenden
 - Laserpointer & Spotlight auf dem Beamer – man tippt einfach auf die Vorschau
 - Folienvorschau auf dem Handy (wählbarer Bildschirm)
-- Timer: Countdown/Stoppuhr, Vibration bei 5/2/1 Min. und 0, Aufblitzen am iPhone, läuft am Laptop weiter
+- Timer: Countdown/Stoppuhr, Bildschirm blinkt bei 5/2/1 Min. und am Ende, läuft am Laptop weiter
 - Sicherheit: Einmal-Code, abgeleiteter Geräteschlüssel, signierte Befehle, Zustimmung für weitere Geräte, Sperre
 - Schul-WLAN: Hotspot-Anleitung, automatischer Hinweis, QR-Code passt sich beim Netzwechsel an
 - Testfolien, Laptop wach halten, Handy wach halten, Querformat, Linkshänder, Bluetooth-Tastatur am Tablet

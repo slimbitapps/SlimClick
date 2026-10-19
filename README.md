@@ -5,7 +5,7 @@ Free · no ads · no account · works on school Wi-Fi (via phone hotspot) · onl
 
 ⬇️ **[Download SlimClick](https://slimbitapps.github.io/SlimClick/)** · by [SlimBit Apps](https://slimbitapps.github.io/)
 
-![SlimClick on the laptop shows a QR code](marketing/screenshots/en-10-home-qr.png)
+![SlimClick on the laptop shows a QR code](marketing/screenshots/en-1-hero.png)
 
 ## Why SlimClick?
 
@@ -13,15 +13,15 @@ Free · no ads · no account · works on school Wi-Fi (via phone hotspot) · onl
 - **Every presentation program** – SlimClick presses the same keys as a real clicker: PowerPoint, Keynote, Google Slides, LibreOffice, Canva, PDF.
 - **Laser pointer & spotlight** – touch the slide preview on your phone; the red dot appears exactly there on the projector.
 - **Slide preview on the phone** – see what the audience sees, even when you face them.
-- **Timer that vibrates** – 5, 2 and 1 minute before the end (Android; the iPhone screen flashes).
+- **Timer with a silent warning** – the phone screen flashes 5, 2 and 1 minute before the end.
 - **Go to slide, black screen, start/end presentation** – all on the phone.
 - **Secure** – one-time key in the QR code (never sent over the network), every command signed, extra devices need your approval.
 - **School Wi-Fi** – built-in step-by-step hotspot guide; the QR code updates by itself when the network changes.
 - English, German, French, Spanish, Italian · light & dark theme · simple and pro mode.
 
 <p>
-  <img src="marketing/screenshots/en-22-phone-laser.png" width="260" alt="Laser pointer on the phone" />
-  <img src="marketing/screenshots/en-24-phone-timer.png" width="260" alt="Timer on the phone" />
+  <img src="marketing/raw/en/22-phone-laser.png" width="260" alt="Laser pointer on the phone" />
+  <img src="marketing/raw/en/24-phone-timer.png" width="260" alt="Timer on the phone" />
 </p>
 
 ## Install
@@ -60,7 +60,7 @@ Beim ersten Start: **Sprache**, **Aussehen**, **Bedienung** (Einfach/Profi), am 
 | Spotlight | Nur eine Stelle bleibt hell |
 | Schwarz | Bildschirm schwarz (nochmal = zurück) |
 | Gehe zu | Foliennummer eintippen |
-| Timer | Countdown oder Stoppuhr, vibriert bei 5/2/1 Min. und 0 |
+| Timer | Countdown oder Stoppuhr, Bildschirm blinkt bei 5/2/1 Min. und am Ende |
 | ⋯ Mehr | Präsentation starten (PowerPoint, Keynote, Google Slides, PDF), beenden, erste/letzte Folie, weiß, Linkshänder-Modus |
 
 **Ausprobieren ohne PowerPoint:** In der App „Testfolien öffnen“.
@@ -85,10 +85,12 @@ Meldet sich 40 Sekunden lang kein Handy, schlägt die App das von selbst vor.
 ## Stand der Entwicklung
 
 **Version 1.0** – Weiter/Zurück, Wischen, Gehe zu, Schwarz/Weiß, Präsentation starten/beenden, Laserpointer & Spotlight,
-Folienvorschau, Timer (Countdown/Stoppuhr, Vibration, Aufblitzen), sichere Kopplung, Zustimmung für weitere Geräte,
+Folienvorschau, Timer (Countdown/Stoppuhr, Aufblitzen als Warnung), sichere Kopplung, Zustimmung für weitere Geräte,
 Hotspot-Anleitung, Testfolien, Querformat, Linkshänder-Modus, Laptop wach halten, 5 Sprachen, hell/dunkel, Einfach/Profi.
 
 **Als Nächstes (Version 2):** Sprechernotizen aus der PowerPoint-Datei – siehe [docs/PLAN.md](docs/PLAN.md).
+
+Veröffentlichen & bekannt machen: [docs/VEROEFFENTLICHEN.md](docs/VEROEFFENTLICHEN.md) · Texte für Portale: [docs/STORE-TEXTE.md](docs/STORE-TEXTE.md)
 
 ---
 

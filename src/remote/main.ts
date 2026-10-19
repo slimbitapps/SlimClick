@@ -43,7 +43,6 @@ let pairCode: string | null = new URLSearchParams(location.hash.slice(1)).get('p
 if (location.hash) history.replaceState(null, '', location.pathname);
 
 const prefs = {
-  haptics: store.get('haptics') !== '0',
   lefty: store.get('lefty') === '1',
 };
 
@@ -281,13 +280,6 @@ function toast(text: string, ms = 2500) {
   clearTimeout(bannerTimer);
   bannerTimer = window.setTimeout(() => (el.hidden = true), ms);
 }
-function buzz(pattern: number | number[]) {
-  try {
-    navigator.vibrate?.(pattern);
-  } catch {
-    /* nicht jedes Handy kann vibrieren (iPhone im Browser leider nicht) */
-  }
-}
 function flash(kind: 'warn' | 'end') {
   const f = $('flash');
   f.className = 'flash ' + kind;
@@ -307,7 +299,7 @@ document.addEventListener('pointerdown', keepAwake, { capture: true });
 
 // ------------------------------------------------------------------ Knöpfe
 function act(c: string, a: unknown = null) {
-  if (send(c, a) && prefs.haptics) buzz(12);
+  send(c, a);
   if (c === 'next' || c === 'prev') pulse(c);
 }
 function pulse(c: string) {
@@ -329,7 +321,6 @@ document.querySelectorAll<HTMLButtonElement>('[data-tool]').forEach((b) => {
     document.querySelectorAll('[data-tool]').forEach((x) => x.classList.toggle('on', (x as HTMLElement).dataset.tool === tool));
     $('preview').classList.toggle('pointing', !!tool);
     $('phint').hidden = !tool;
-    if (prefs.haptics) buzz(8);
   });
 });
 
@@ -489,11 +480,9 @@ setInterval(() => {
     if (hit.length) {
       const last = Math.min(...hit);
       if (last === 0) {
-        buzz([500, 200, 500, 200, 800]);
         flash('end');
         toast(tr('timeUp'), 4000);
       } else {
-        buzz([180, 120, 180]);
         flash('warn');
         toast(tr('timeLeft', { m: Math.round(last / 60) }), 3000);
       }
@@ -561,7 +550,6 @@ $('timerBtn').onclick = () => {
       );
       $('tToggle').onclick = () => {
         send('timer', { op: 'toggle' });
-        if (prefs.haptics) buzz(15);
       };
       $('tReset').onclick = () => send('timer', { op: 'reset' });
     },
@@ -597,7 +585,6 @@ $('gotoBtn').onclick = () => {
               return;
             } else if (num.length < 4) num += n;
             $('numDisp').textContent = num || '–';
-            if (prefs.haptics) buzz(6);
           }),
       );
     },
@@ -622,16 +609,11 @@ $('moreBtn').onclick = () => {
       <button class="btn danger-soft" data-a="end">${tr('endPres')}</button>
     </div>
     <div class="label">${tr('options')}</div>
-    <label class="switch"><span>${tr('haptics')}</span><input type="checkbox" id="optHaptics" ${prefs.haptics ? 'checked' : ''}/></label>
     <label class="switch"><span>${tr('lefty')}</span><input type="checkbox" id="optLefty" ${prefs.lefty ? 'checked' : ''}/></label>
     <button class="btn ghost danger" id="forget">${tr('forget')}</button>`,
     (el) => {
       el.querySelectorAll<HTMLElement>('[data-start]').forEach((b) => (b.onclick = () => (act('start', { app: b.dataset.start }), closeSheet())));
       el.querySelectorAll<HTMLElement>('[data-a]').forEach((b) => (b.onclick = () => (act(b.dataset.a!), closeSheet())));
-      $<HTMLInputElement>('optHaptics').onchange = (e) => {
-        prefs.haptics = (e.target as HTMLInputElement).checked;
-        store.set('haptics', prefs.haptics ? '1' : '0');
-      };
       $<HTMLInputElement>('optLefty').onchange = (e) => {
         prefs.lefty = (e.target as HTMLInputElement).checked;
         store.set('lefty', prefs.lefty ? '1' : '0');

@@ -50,7 +50,7 @@ export const es: Dict = {
   'onb.tour.2.title': 'Iniciar la presentación',
   'onb.tour.2.text': 'PowerPoint, Keynote, Google Slides o PDF, a pantalla completa.',
   'onb.tour.3.title': 'Tocar Siguiente',
-  'onb.tour.3.text': 'Cambiar diapositivas, puntero láser, temporizador con vibración: todo en el móvil.',
+  'onb.tour.3.text': 'Cambiar diapositivas, puntero láser, temporizador: todo en el móvil.',
   'onb.safe': 'Seguro: solo tu móvil puede controlar. Todo se queda en tu wifi.',
   'onb.start': 'Empezar',
 
@@ -105,7 +105,7 @@ export const es: Dict = {
   'timer.countdown': 'Cuenta atrás',
   'timer.stopwatch': 'Cronómetro',
   'timer.minutes': '{n} min',
-  'timer.hint': 'El móvil vibra cuando quedan 5, 2 y 1 minuto y al final (Android). En el iPhone parpadea la pantalla.',
+  'timer.hint': 'La pantalla del móvil parpadea en amarillo cuando quedan 5, 2 y 1 minuto y en rojo al final, sin que el público lo note.',
 
   'net.wifi': 'Wifi',
   'net.ethernet': 'Cable de red',
@@ -208,8 +208,8 @@ export const es: Dict = {
   'faq.5.a': 'SlimClick mantiene la pantalla encendida en cuanto tocas una vez. Si aun así se apaga, desbloquéalo: la conexión vuelve sola.',
   'faq.6.q': '¿SlimClick necesita Internet o datos móviles?',
   'faq.6.a': 'No. Todo va directo entre el móvil y el portátil. Sin cuenta, sin nube y sin recopilar datos.',
-  'faq.7.q': '¿Por qué no vibra mi iPhone?',
-  'faq.7.a': 'Apple no permite que las páginas web vibren. Por eso, en el iPhone la pantalla parpadea con el temporizador. Los móviles Android vibran.',
+  'faq.7.q': '¿Cómo sé que el tiempo casi se acaba?',
+  'faq.7.a': 'La pantalla del móvil parpadea en amarillo cuando quedan 5, 2 y 1 minuto y en rojo al final. Arriba ves el tiempo restante. Los avisos se ajustan en el temporizador del móvil.',
   'faq.8.q': 'El puntero láser está en la pantalla equivocada.',
   'faq.8.a': 'Ajustes → Puntero láser → Pantalla. Elige el proyector.',
 

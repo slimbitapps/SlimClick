@@ -50,7 +50,7 @@ export const en: Dict = {
   'onb.tour.2.title': 'Start your presentation',
   'onb.tour.2.text': 'PowerPoint, Keynote, Google Slides or PDF – in full screen.',
   'onb.tour.3.title': 'Tap Next',
-  'onb.tour.3.text': 'Change slides, laser pointer, timer with vibration – all on your phone.',
+  'onb.tour.3.text': 'Change slides, laser pointer, timer – all on your phone.',
   'onb.safe': 'Safe: only your phone can control it. Everything stays in your Wi-Fi.',
   'onb.start': 'Let’s go',
 
@@ -105,7 +105,7 @@ export const en: Dict = {
   'timer.countdown': 'Countdown',
   'timer.stopwatch': 'Stopwatch',
   'timer.minutes': '{n} min',
-  'timer.hint': 'The phone vibrates with 5, 2 and 1 minute left and at the end (Android). On an iPhone the screen flashes.',
+  'timer.hint': 'The phone screen briefly flashes yellow with 5, 2 and 1 minute left and red at the end – unnoticed by the audience.',
 
   'net.wifi': 'Wi-Fi',
   'net.ethernet': 'Ethernet',
@@ -208,8 +208,8 @@ export const en: Dict = {
   'faq.5.a': 'SlimClick keeps the screen awake once you tap. If it still turns off, just unlock it – the connection comes back by itself.',
   'faq.6.q': 'Does SlimClick need internet or mobile data?',
   'faq.6.a': 'No. Everything runs directly between phone and laptop. No account, no cloud, no data collection.',
-  'faq.7.q': 'Why doesn’t my iPhone vibrate?',
-  'faq.7.a': 'Apple doesn’t allow websites to vibrate. That’s why the screen flashes for the timer on an iPhone. Android phones vibrate.',
+  'faq.7.q': 'How do I know time is almost up?',
+  'faq.7.a': 'The phone screen briefly flashes yellow with 5, 2 and 1 minute left and red at the end. The time left is shown at the top. You set the times in the timer on your phone.',
   'faq.8.q': 'The laser pointer is on the wrong screen.',
   'faq.8.a': 'Settings → Laser pointer → Screen. Choose the projector.',
 

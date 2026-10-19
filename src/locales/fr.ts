@@ -50,7 +50,7 @@ export const fr: Dict = {
   'onb.tour.2.title': 'Lancer la présentation',
   'onb.tour.2.text': 'PowerPoint, Keynote, Google Slides ou PDF – en plein écran.',
   'onb.tour.3.title': 'Toucher Suivant',
-  'onb.tour.3.text': 'Changer de diapo, pointeur laser, minuteur qui vibre – tout sur ton téléphone.',
+  'onb.tour.3.text': 'Changer de diapo, pointeur laser, minuteur – tout sur ton téléphone.',
   'onb.safe': 'Sûr : seul ton téléphone peut piloter. Tout reste dans ton Wi-Fi.',
   'onb.start': 'C’est parti',
 
@@ -105,7 +105,7 @@ export const fr: Dict = {
   'timer.countdown': 'Compte à rebours',
   'timer.stopwatch': 'Chronomètre',
   'timer.minutes': '{n} min',
-  'timer.hint': 'Le téléphone vibre à 5, 2 et 1 minute de la fin et à la fin (Android). Sur iPhone, l’écran clignote.',
+  'timer.hint': 'L’écran du téléphone clignote en jaune à 5, 2 et 1 minute de la fin, puis en rouge à la fin – discret pour le public.',
 
   'net.wifi': 'Wi-Fi',
   'net.ethernet': 'Ethernet',
@@ -208,8 +208,8 @@ export const fr: Dict = {
   'faq.5.a': 'SlimClick garde l’écran allumé dès que tu touches une fois. S’il s’éteint quand même, déverrouille-le – la connexion revient toute seule.',
   'faq.6.q': 'SlimClick a-t-il besoin d’Internet ou de données mobiles ?',
   'faq.6.a': 'Non. Tout passe directement entre le téléphone et l’ordinateur. Pas de compte, pas de cloud, aucune collecte de données.',
-  'faq.7.q': 'Pourquoi mon iPhone ne vibre-t-il pas ?',
-  'faq.7.a': 'Apple n’autorise pas les sites web à faire vibrer. Pour le minuteur, l’écran de l’iPhone clignote donc. Les téléphones Android vibrent.',
+  'faq.7.q': 'Comment savoir que le temps est presque écoulé ?',
+  'faq.7.a': 'L’écran du téléphone clignote en jaune à 5, 2 et 1 minute de la fin, puis en rouge à la fin. Le temps restant est affiché en haut. Tu règles les moments dans le minuteur du téléphone.',
   'faq.8.q': 'Le pointeur laser est sur le mauvais écran.',
   'faq.8.a': 'Réglages → Pointeur laser → Écran. Choisis le vidéoprojecteur.',
 

@@ -49,7 +49,7 @@ export const de = {
   'onb.tour.2.title': 'Präsentation starten',
   'onb.tour.2.text': 'PowerPoint, Keynote, Google Slides oder PDF – im Vollbild.',
   'onb.tour.3.title': 'Weiter tippen',
-  'onb.tour.3.text': 'Folien wechseln, Laserpointer, Timer mit Vibration – alles am Handy.',
+  'onb.tour.3.text': 'Folien wechseln, Laserpointer, Timer – alles am Handy.',
   'onb.safe': 'Sicher: Nur dein Handy kann steuern. Alles bleibt in deinem WLAN.',
   'onb.start': 'Los geht’s',
 
@@ -104,7 +104,7 @@ export const de = {
   'timer.countdown': 'Countdown',
   'timer.stopwatch': 'Stoppuhr',
   'timer.minutes': '{n} Min.',
-  'timer.hint': 'Das Handy vibriert bei 5, 2 und 1 Minute Restzeit und am Ende (Android). Am iPhone blinkt der Bildschirm.',
+  'timer.hint': 'Der Handy-Bildschirm blinkt bei 5, 2 und 1 Minute Restzeit kurz gelb und am Ende rot – unauffällig fürs Publikum.',
 
   'net.wifi': 'WLAN',
   'net.ethernet': 'LAN-Kabel',
@@ -207,8 +207,8 @@ export const de = {
   'faq.5.a': 'SlimClick hält den Bildschirm wach, sobald du einmal tippst. Geht er trotzdem aus, einfach entsperren – die Verbindung kommt von selbst zurück.',
   'faq.6.q': 'Braucht SlimClick Internet oder Datenvolumen?',
   'faq.6.a': 'Nein. Alles läuft direkt zwischen Handy und Laptop. Es gibt kein Konto, keine Cloud und keine Datensammlung.',
-  'faq.7.q': 'Warum vibriert mein iPhone nicht?',
-  'faq.7.a': 'Apple erlaubt Webseiten kein Vibrieren. Beim Timer blinkt am iPhone deshalb der Bildschirm. Android-Handys vibrieren.',
+  'faq.7.q': 'Wie merke ich, dass die Zeit fast um ist?',
+  'faq.7.a': 'Der Handy-Bildschirm blinkt bei 5, 2 und 1 Minute Restzeit kurz gelb und am Ende rot. Oben steht, wie viel Zeit noch bleibt. Die Zeiten stellst du im Timer am Handy ein.',
   'faq.8.q': 'Der Laserpointer ist auf dem falschen Bildschirm.',
   'faq.8.a': 'Einstellungen → Laserpointer → Bildschirm. Wähle den Beamer aus.',
 
