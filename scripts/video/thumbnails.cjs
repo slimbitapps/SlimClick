@@ -47,6 +47,24 @@ const THUMBS = {
     <div class="b" style="left:50%;transform:translateX(-50%);top:1480px;font-size:60px;white-space:nowrap">📶 Hotspot = fixed</div>
     <div class="t" style="left:0;right:0;top:1700px;font-size:110px;text-align:center"><span class="g">10-second fix</span></div>`,
     `const o = phone(stage, { x: 390, y: 690, w: 300 }); o.deck.show(0);`],
+  // ---------- Runde 2
+  'SlimClick-Short4-Thumbnail.jpg': [1080, 1920, `
+    <div class="t" style="left:60px;right:60px;top:140px;font-size:150px;text-align:center">Out of<br>time?</div>
+    <div class="t" style="left:0;right:0;top:1700px;font-size:104px;text-align:center"><span class="g">Only you notice.</span></div>`,
+    `const o = phone(stage, { x: 300, y: 560, w: 480 }); o.deck.show(3); o.timer.textContent = '04:59'; o.timer.style.color = '#f6b03c';
+     o.flash.style.background = '#f6b03c'; o.flash.style.opacity = .45;`],
+  'SlimClick-Short5-Thumbnail.jpg': [1080, 1920, `
+    <div class="t" style="left:60px;right:60px;top:140px;font-size:140px;text-align:center">Classmate<br>takes over?</div>
+    <div style="position:absolute;left:600px;top:760px;font-size:380px;font-weight:900;color:#ff4d6d;line-height:1;z-index:6">✕</div>
+    <div class="t" style="left:0;right:0;top:1700px;font-size:110px;text-align:center"><span class="g">Not possible.</span></div>`,
+    `const a = phone(stage, { x: 110, y: 600, w: 400 }); a.deck.show(1); a.rig.style.transform += ' rotate(-4deg)';
+     const b = phone(stage, { x: 580, y: 600, w: 400 }); b.deck.show(1); b.next.style.background = 'linear-gradient(135deg,#5a5f6b,#3a3e47)'; b.rig.style.transform += ' rotate(4deg)';`],
+  'SlimClick-Short6-Thumbnail.jpg': [1080, 1920, `
+    <div class="t" style="left:60px;right:60px;top:140px;font-size:140px;text-align:center">Stop turning<br>your back</div>
+    <div style="position:absolute;left:0;right:0;top:470px;text-align:center;font-size:110px;z-index:5">🧑‍🎓 👩‍🎓 👨‍🎓 👩‍🎓</div>
+    <div class="t" style="left:0;right:0;top:1700px;font-size:110px;text-align:center"><span class="g">Live preview</span></div>`,
+    `const o = phone(stage, { x: 315, y: 660, w: 450 }); o.deck.show(1); o.ring.style.opacity = 1;`],
+
   // ---------- Social-Media-Bilder (Feed-Posts, Community-Beitrag, Story)
   'SlimClick-Square.jpg': [1080, 1080, `
     <div class="t" style="left:70px;top:120px;font-size:112px">Your <span class="g">phone</span><br>is the<br>clicker.</div>

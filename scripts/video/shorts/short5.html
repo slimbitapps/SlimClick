@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="style.css" />
+<style>
+  html, body { width: 1080px; height: 1920px; }
+  .badge { position: absolute; padding: 10px 20px; border-radius: 999px; font-size: 34px; font-weight: 800; white-space: nowrap; }
+  .polaroid { position: absolute; width: 300px; padding: 18px 18px 60px; background: #f4f1ea; border-radius: 10px; box-shadow: 0 30px 70px rgba(0,0,0,.6); }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="../motion/core.js"></script>
+<script src="../motion/slimclick.js"></script>
+<script>
+// Short 5 – Sicherheit: Einmal-QR-Code, signierte Befehle, Zustimmung am Laptop.
+// Zeiten = gesprochene Wörter (aus words.py, Sekunden ab Szenenbeginn)
+const pop = (e, lt, at, base = 'translateX(-50%) ') => { const k = E.back(p(lt, at, 0.4)); e.style.opacity = p(lt, at, 0.2); e.style.transform = `${base}scale(${0.6 + 0.4 * k})`; };
+
+// ---------- 1: Hook – kann ein Mitschüler übernehmen?
+scene('hook', (r, s) => {
+  s.t1 = headline(r, 'Can a classmate', 130, 104);
+  s.t2 = headline(r, 'take over?', 250, 104);
+  s.me = phone(r, { x: 120, y: 560, w: 360 });
+  s.me.deck.show(1);
+  s.them = phone(r, { x: 600, y: 560, w: 360 });
+  s.them.deck.show(1);
+  s.them.next.style.background = 'linear-gradient(135deg,#5a5f6b,#3a3e47)';
+  s.lbl1 = el('div', 'badge', r, '✓ You');
+  css(s.lbl1, { left: '230px', top: '1350px', background: 'rgba(51,195,122,.18)', color: '#7ef0a8' });
+  s.lbl2 = el('div', 'badge', r, '😈 Classmate');
+  css(s.lbl2, { left: '650px', top: '1350px', background: 'rgba(255,77,109,.18)', color: '#ff8aa0' });
+  s.x = el('div', 'abs', r, '✕');
+  css(s.x, { left: '640px', top: '760px', fontSize: '360px', fontWeight: 900, color: '#ff4d6d', lineHeight: 1 });
+}, (s, lt, D) => {
+  drawWords(s.t1, lt, 0.05, 0.1);
+  drawWords(s.t2, lt, 1.4, 0.1); // „take over“
+  const k = E.back(p(lt, 0.2, 0.6));
+  s.me.place(120, 560 + (1 - k) * 600, 1, -4);
+  s.them.place(600, 560 + (1 - E.back(p(lt, 0.5, 0.6))) * 600, 1, 4);
+  tapAt(s.them, 242, 590, lt - 2.2);
+  const kx = E.back(p(lt, 3.4, 0.35)); // „can't“
+  s.x.style.opacity = p(lt, 3.4, 0.1);
+  s.x.style.transform = `scale(${0.4 + 0.6 * kx})`;
+  [s.lbl1, s.lbl2].forEach((l, i) => (l.style.opacity = p(lt, 0.8 + i * 0.3, 0.3)));
+});
+scenes[scenes.length - 1].sfx = () => [{ t: 2.2, type: 'click' }, { t: 3.4, type: 'pop' }];
+
+// ---------- 2: Der QR-Code gilt nur einmal
+scene('once', (r, s) => {
+  s.t = headline(r, 'The QR code works once', 120, 84);
+  s.lap = laptop(r, 860, 540, 560);
+  s.lap.useShot('10-home-qr');
+  s.ph = phone(r, { x: 370, y: 930, w: 340 });
+  s.ph.alt.style.display = 'block';
+  s.cam = cameraView(s.ph);
+  s.ph.deck.show(0);
+  s.once = el('div', 'chip', r, '1× only');
+  css(s.once, { left: '780px', top: '300px', fontSize: '40px' });
+  s.newc = el('div', 'chip', r, '🔄 New code');
+  css(s.newc, { left: '780px', top: '300px', fontSize: '40px', color: '#7ef0a8' });
+  s.pol = el('div', 'polaroid', r, `<div style="background:#fff;padding:14px">${QR}</div>`);
+  css(s.pol, { left: '60px', top: '1130px' });
+  s.px = el('div', 'abs', r, '✕');
+  css(s.px, { left: '110px', top: '1130px', fontSize: '300px', fontWeight: 900, color: '#ff4d6d', lineHeight: 1 });
+  s.useless = el('div', 'badge', r, 'Photo = useless');
+  css(s.useless, { left: '70px', top: '1560px', background: 'rgba(255,77,109,.18)', color: '#ff8aa0' });
+}, (s, lt, D) => {
+  drawWords(s.t, lt, 0.05, 0.08);
+  place(s.lap, { s: 1 });
+  pop(s.once, lt, 2.0, '');
+  s.once.style.opacity = p(lt, 2.0, 0.2) * (1 - p(lt, 5.0, 0.2));
+  // Handy scannt und verbindet sich („connects“ 4.16)
+  s.cam.box.style.opacity = p(lt, 3.3, 0.25);
+  s.cam.banner.style.opacity = p(lt, 3.6, 0.2);
+  tapAt(s.ph, 195, 108, lt - 3.9);
+  const sw = p(lt, 4.15, 0.3);
+  s.ph.alt.style.opacity = 1 - sw;
+  s.ph.alt.style.display = sw < 1 ? 'block' : 'none';
+  // „code changes“ 5.07: QR-Code am Laptop wechselt (Aufblitzen + gespiegeltes Muster)
+  const ch = lt >= 5.05;
+  s.lap.shot.style.filter = `brightness(${1 + 0.9 * Math.max(0, 1 - Math.abs(lt - 5.1) * 5)})`;
+  s.lap.shot.style.transform = ch ? 'scaleX(-1)' : 'none';
+  if (ch) pop(s.newc, lt, 5.1, ''); else s.newc.style.opacity = 0;
+  // „photo of it is useless“ 6.6
+  const kp = E.out(p(lt, 6.1, 0.5));
+  s.pol.style.opacity = p(lt, 6.1, 0.2);
+  s.pol.style.transform = `translateY(${(1 - kp) * 300}px) rotate(${-8 + 4 * kp}deg)`;
+  const kx = E.back(p(lt, 7.3, 0.3)); // „useless“
+  s.px.style.opacity = p(lt, 7.3, 0.1);
+  s.px.style.transform = `scale(${0.4 + 0.6 * kx})`;
+  s.useless.style.opacity = p(lt, 7.35, 0.2);
+});
+scenes[scenes.length - 1].sfx = () => [{ t: 2.0, type: 'pop' }, { t: 3.3, type: 'pop' }, { t: 3.9, type: 'click' }, { t: 5.05, type: 'whoosh' }, { t: 6.1, type: 'whoosh' }, { t: 7.3, type: 'pop' }];
+
+// ---------- 3: Jeder Tipp ist signiert – Fälschungen werden abgelehnt
+scene('signed', (r, s) => {
+  s.t = headline(r, 'Every tap is signed', 120, 96);
+  s.ph = phone(r, { x: 120, y: 520, w: 380 });
+  s.ph.deck.show(1);
+  s.sigs = [0, 1, 2].map(() => { const b = el('div', 'badge', r, '🔏 signed ✓'); css(b, { background: 'rgba(51,195,122,.18)', color: '#7ef0a8', left: '560px' }); return b; });
+  s.fake = el('div', 'abs', r, `<div style="font-size:150px;text-align:center">👾</div><div class="badge" style="position:static;display:inline-block;background:rgba(255,77,109,.18);color:#ff8aa0">fake tap</div>`);
+  css(s.fake, { left: '600px', top: '1050px', width: '400px', textAlign: 'center' });
+  s.block = el('div', 'chip', r, '✕ Blocked');
+  css(s.block, { left: '800px', top: '1450px', color: '#ff8aa0' });
+}, (s, lt, D) => {
+  drawWords(s.t, lt, 0.05, 0.1);
+  const taps = [0.58, 1.1, 1.9]; // „tap“, „make“, „so“
+  const last = [...taps].reverse().find((t) => lt >= t - 0.1);
+  tapAt(s.ph, 242, 590, last !== undefined ? lt - last : -9);
+  pressBtn(s.ph.next, last !== undefined ? lt - last : -9);
+  showTimeline(s.ph.deck, lt, taps.map((t, i) => ({ t: t + 0.08, idx: 1 + ((i + 1) % 4) })), 1);
+  s.sigs.forEach((b, i) => {
+    const q = p(lt, taps[i], 1.2);
+    css(b, { top: 900 - q * 300 + 'px', opacity: q > 0 && q < 1 ? Math.min(1, (1 - q) * 3) : 0 });
+  });
+  s.fake.style.opacity = p(lt, 2.4, 0.3); // „nobody else“
+  s.fake.style.transform = `translateX(${(1 - E.out(p(lt, 2.4, 0.4))) * 200}px)`;
+  pop(s.block, lt, 3.35); // „fake one“
+});
+scenes[scenes.length - 1].sfx = () => [0.58, 1.1, 1.9].map((t) => ({ t: t - 0.03, type: 'click' })).concat([{ t: 2.4, type: 'whoosh' }, { t: 3.35, type: 'pop' }]);
+
+// ---------- 4: Neues Gerät? Du entscheidest am Laptop
+scene('approve', (r, s) => {
+  s.t = headline(r, 'You decide', 120, 110);
+  s.t.querySelectorAll('.word').forEach((w, i) => i === 1 && w.classList.add('grad'));
+  s.lap = laptop(r, 900, 540, 700);
+  s.lap.useShot('13-approval');
+  s.c = el('div', 'chip', r, '📱 New phone wants to join');
+  css(s.c, { left: '50%', top: '330px', fontSize: '38px' });
+  s.d = el('div', 'chip', r, '✓ Denied – your slides stay yours');
+  css(s.d, { left: '50%', top: '1280px', fontSize: '38px', color: '#7ef0a8' });
+}, (s, lt, D) => {
+  drawWords(s.t, lt, 3.9, 0.12); // „You decide“
+  const k = E.out(p(lt, 0.5, 0.6)); // „another phone“
+  place(s.lap, { s: 0.9 + 0.1 * k, ry: -10 * (1 - k) });
+  s.lap.win.style.opacity = p(lt, 0.4, 0.3);
+  pop(s.c, lt, 0.8);
+  s.lap.shot.style.filter = `brightness(${1 + 0.25 * Math.max(0, Math.sin((lt - 2.7) * 6)) * p(lt, 2.7, 0.1) * (1 - p(lt, 3.9, 0.1))})`; // „asks you first“
+  pop(s.d, lt, 4.1);
+});
+scenes[scenes.length - 1].sfx = () => [{ t: 0.8, type: 'pop' }, { t: 2.7, type: 'pop' }, { t: 4.0, type: 'click' }, { t: 4.1, type: 'pop' }];
+
+// ---------- 5: echte App + Link
+scene('cta', (r, s) => ctaScene(r, s, { vertical: true }), (s, lt) => ctaDraw(s, lt));
+
+start({ captionTop: 1700, captionSize: 64 });
+</script>
+</body>
+</html>

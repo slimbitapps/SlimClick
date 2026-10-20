@@ -23,7 +23,8 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
 
 ## Ablauf (so wenig Handgriffe wie möglich)
 0. Werkzeuge: `bash scripts/setup-tools.sh` (einmalig, dauerhaft in `~/SlimBit-Tools`), dann `. ~/SlimBit-Tools/env.sh`.
-1. **Texte schreiben** (`docs/SPRECHTEXT-INTRO.txt`, `docs/shorts/shortN.txt`, Liste in `scripts/video/videos.json`),
+1. **Texte schreiben** (`docs/SPRECHTEXT-INTRO.txt`, `docs/shorts/shortN.txt`, aktuelle Runde in `scripts/video/videos.json`,
+   fertige Runden stehen dort unter `done`),
    dann **ein** gemeinsamer Text: `python3 scripts/video/voice.py text` → `docs/SPRECHTEXT-ALLE.txt`
    (zwischen den Videos „Next video.“). Diesen Text bekommt der Nutzer. **Noch kein Video bauen.**
 2. Nutzer spricht ihn in **Clipchamp** ein (Stimme *Andrew*) und schickt **eine** Datei → nach `private/` (nie committen).
@@ -37,7 +38,8 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
 7. **Alles rendern + fertig machen:** `bash scripts/video/render-all.sh private/work video-out`
    → je Video: Rendern, 0,5 s Deckblatt, Lautheit (zwei Durchgänge); danach `package.py`.
    Untertitel (nur Englisch): `python3 scripts/video/intro/subtitles.py private/work docs/SPRECHTEXT-INTRO.txt docs/<App>-Intro-EN.srt intro`.
-8. **Sync prüfen:** `words.py` auf jedem fertigen MP4 + Standbilder an den Schlüsselwörtern (alle Zeiten +0,5 s).
+8. **Sync prüfen:** `words.py` auf jedem fertigen MP4 + `bash scripts/video/stills.sh VIDEO.mp4 private/check/x ZEITEN…`
+   (Standbilder an den Schlüsselwörtern, alle Zeiten +0,5 s wegen Deckblatt).
 9. **Liefern:** `python3 scripts/video/package.py video-out` → **`<App>-Videos.zip`** in fester Ordnerstruktur:
    `1-Intro/` · `2-Short1-…/` … (MP4 + Titelbild, Intro + SRT) · `Bilder/YouTube|TikTok|Instagram|Logo|Screenshots/`
    · `Texte-zum-Kopieren.txt` · `LIESMICH.txt`. Fehlt etwas, bricht das Skript ab.
