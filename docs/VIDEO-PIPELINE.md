@@ -21,35 +21,31 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
 | `scripts/video/intro/render.cjs` | Rendert Bild für Bild, mischt Stimme + Effekte (Ducking) |
 | `scripts/video/intro/words.py`, `align.py`, `subtitles.py` | Stimme prüfen, aufteilen, SRT erzeugen |
 
-## Ablauf
-1. **Vorschau ohne Stimme** (Szenenlängen aus dem Text geschätzt):
-   `node scripts/video/intro/render.cjs WORK --page scripts/video/shorts/short1.html --w 1080 --h 1920 --text docs/shorts/short1.txt --preview --out video-out/Vorschau-Short1.mp4`
-   Standbilder statt Video: `--stills 1,5,9`.
-2. **Stimme** (Clipchamp, Stimme *Andrew*): jeden Text **am Stück** einsprechen → `.mp3`/`.m4a` nach `private/` (nie committen).
-3. **Prüfen:** `python3 scripts/video/intro/words.py private/short1.mp3 docs/shorts/short1.txt`
-   → richtiger Text? Vorschlag für Absatzgrenzen (`ALIGN_BOUNDS`).
-4. **Aufteilen:** `[ALIGN_BOUNDS=…] python3 scripts/video/intro/align.py private/short1.mp3 WORK docs/shorts/short1.txt short1`
-   → `WORK/voice-short1/absatz-XX.wav`, `WORK/voice-aligned-short1.wav`, `WORK/durations-short1.txt`.
-5. **Rendern:** wie 1., aber ohne `--preview` und mit
-   `--durations $(cat WORK/durations-short1.txt) --voicedir WORK/voice-short1 --voice WORK/voice-aligned-short1.wav`.
-   Danach Ereignisse an die echten Wortzeiten aus `words.py` anpassen.
-6. **Thumbnails:** `node scripts/video/thumbnails.cjs video-out`
-7. **Fertig machen:** `bash scripts/video/finish.sh master.mp4 THUMBNAIL.jpg FINAL.mp4 -14` (Intro: `-15`)
-   → setzt das Thumbnail **0,5 s als Deckblatt** vor das Video (eigene Thumbnails darf das Konto noch nicht hochladen;
-   so lässt es sich beim Hochladen als Titelbild auswählen) und normalisiert die Lautheit in zwei Durchgängen.
-   Alles auf einmal (Rendern + Deckblatt + Lautheit): `bash scripts/video/render-all.sh WORK video-out`.
-   Untertitel (nur Englisch): `python3 scripts/video/intro/subtitles.py WORK docs/SPRECHTEXT-INTRO.txt docs/SlimClick-Intro-EN.srt intro`
-   (berücksichtigt das Deckblatt automatisch).
-8. **Alle Texte in einer Datei:** `python3 scripts/video/upload-texte.py` → `docs/UPLOAD-TEXTE.txt`
-   (Sprechtext, Titel, Beschreibung, Tags, Kommentar, TikTok, Instagram, Zeitpunkt – für alle Videos; macht auch render-all.sh).
-9. **Alle Bilder in einem ZIP:** `bash scripts/video/make-zip.sh video-out` → `SlimClick-Bilder.zip`
-   (YouTube, TikTok, Instagram, Logo, Screenshots – nach Plattform sortiert; macht auch render-all.sh).
-10. **Sync prüfen:** `words.py FINAL.mp4` + Standbilder an den Schlüsselwörtern (alle Zeiten +0,5 s wegen Deckblatt).
+## Ablauf (so wenig Handgriffe wie möglich)
+0. Werkzeuge: `bash scripts/setup-tools.sh` (einmalig, dauerhaft in `~/SlimBit-Tools`), dann `. ~/SlimBit-Tools/env.sh`.
+1. **Texte schreiben** (`docs/SPRECHTEXT-INTRO.txt`, `docs/shorts/shortN.txt`, Liste in `scripts/video/videos.json`),
+   dann **ein** gemeinsamer Text: `python3 scripts/video/voice.py text` → `docs/SPRECHTEXT-ALLE.txt`
+   (zwischen den Videos „Next video.“). Diesen Text bekommt der Nutzer. **Noch kein Video bauen.**
+2. Nutzer spricht ihn in **Clipchamp** ein (Stimme *Andrew*) und schickt **eine** Datei → nach `private/` (nie committen).
+3. **Zerschneiden:** `python3 scripts/video/voice.py split private/AUFNAHME.m4a` → `private/voice/<id>.wav`
+   + Bericht (erste/letzte Wörter, Warnung, wenn die Wortzahl nicht passt).
+4. **Prüfen + Absätze:** je Video `python3 scripts/video/intro/words.py private/voice/<id>.wav TEXT` – richtiger Text?
+   Absatzgrenzen anhand der Wortzeiten setzen, dann
+   `ALIGN_BOUNDS=… python3 scripts/video/intro/align.py private/voice/<id>.wav private/work TEXT <id> MIN…` (MIN aus videos.json).
+5. **Ereignisse auf Wörter legen:** Wortzeiten je Szene (aus `words.py` auf `voice-aligned-<id>.wav`) in die Szenen-HTML eintragen.
+6. **Bilder:** `node scripts/video/thumbnails.cjs video-out` (Thumbnails, Cover, Feed-Posts, Quadrat, Story).
+7. **Alles rendern + fertig machen:** `bash scripts/video/render-all.sh private/work video-out`
+   → je Video: Rendern, 0,5 s Deckblatt, Lautheit (zwei Durchgänge); danach `package.py`.
+   Untertitel (nur Englisch): `python3 scripts/video/intro/subtitles.py private/work docs/SPRECHTEXT-INTRO.txt docs/<App>-Intro-EN.srt intro`.
+8. **Sync prüfen:** `words.py` auf jedem fertigen MP4 + Standbilder an den Schlüsselwörtern (alle Zeiten +0,5 s).
+9. **Liefern:** `python3 scripts/video/package.py video-out` → **`<App>-Videos.zip`** in fester Ordnerstruktur:
+   `1-Intro/` · `2-Short1-…/` … (MP4 + Titelbild, Intro + SRT) · `Bilder/YouTube|TikTok|Instagram|Logo|Screenshots/`
+   · `Texte-zum-Kopieren.txt` · `LIESMICH.txt`. Fehlt etwas, bricht das Skript ab.
 
 ## Regeln
 - **Keine Übersetzungen** liefern (keine deutschen Untertitel/Titel) – nur Englisch.
-- **Deckblatt** immer 0,5 s am Anfang (siehe 7.).
-- Dem Nutzer **immer zusätzlich eine Text-Datei mit allen Texten aller Videos** (8.) **und ein ZIP mit allen Bildern** für YouTube, TikTok und Instagram (9.) schicken.
+- **Deckblatt** immer 0,5 s am Anfang (finish.sh).
+- Dem Nutzer **nur das eine ZIP** schicken (9.) – darin Videos, alle Bilder und alle Texte.
 - Hook in der 1. Sekunde, ein Gedanke pro Short, 25–35 s, Prinzip als Animation, am Ende echte App + Logo + „Link in profile“.
 - Zielgruppe Schüler & Studenten: Referat-Situation, lockere Sprache, schnelle Schnitte, große Wörter.
 - Keine Maus-/Tastatur-Einblendungen über der echten App. Wortenden der Stimme nie abschneiden.

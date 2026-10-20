@@ -3,6 +3,7 @@
 # Vorher die Thumbnails erzeugen: node scripts/video/thumbnails.cjs AUSGABEORDNER
 #   bash scripts/video/render-all.sh ARBEITSORDNER AUSGABEORDNER [short1 short2 short3 intro]
 set -e
+[ -f ~/SlimBit-Tools/env.sh ] && . ~/SlimBit-Tools/env.sh
 W=$1; OUT=$2; shift 2
 NAMES=${@:-short1 short2 short3 intro}
 for n in $NAMES; do
@@ -13,7 +14,5 @@ for n in $NAMES; do
   # Thumbnail als Deckblatt (0,5 s) vorne + Lautheit (zwei Durchgänge)
   bash scripts/video/finish.sh "$W/out/$n-master.mp4" "$OUT/${F/-Intro/}-Thumbnail.jpg" "$OUT/$F.mp4" $LN
 done
-# Alle Upload-Texte in eine Text-Datei (für den Nutzer)
-python3 scripts/video/upload-texte.py "$OUT/SlimClick-Upload-Texte.txt"
-# Alle Bilder für YouTube, TikTok, Instagram in ein ZIP
-bash scripts/video/make-zip.sh "$OUT"
+# Feste Ordnerstruktur + ein ZIP mit allem (Videos, Bilder, Texte)
+python3 scripts/video/package.py "$OUT"
