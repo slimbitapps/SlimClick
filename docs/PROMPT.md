@@ -1,5 +1,7 @@
 # Prompt für jede neue SlimBit-App
 
+Schöner zum Kopieren: `docs/PROMPT.html` öffnen (neu bauen mit `python3 scripts/prompt-html.py`).
+
 So geht's: **Teil 1** kopieren, unten deine App-Idee anhängen, abschicken.
 Wenn die Testversion passt: **„Go“** schreiben. Für die Videos später **Teil 2** schicken.
 

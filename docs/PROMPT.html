@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SlimBit Prompt</title>
+<style>
+:root{--bg:#f4f5f8;--card:#fff;--ink:#16171c;--mut:#666b78;--line:#e3e5ec;--code:#f7f8fb;--a1:#ff7a59;--a2:#ff3d77}
+@media (prefers-color-scheme:dark){:root{--bg:#111216;--card:#1b1c22;--ink:#eef0f5;--mut:#9aa0ad;--line:#2b2d35;--code:#15161b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:40px 16px 60px}
+header{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--a1),var(--a2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:24px;flex:none}
+h1{margin:0;font-size:28px;letter-spacing:-.02em} header p{margin:2px 0 0;color:var(--mut)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.step span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;font-weight:700;font-size:13px;margin-right:6px}
+.step p{margin:6px 0 0;color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:22px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:14px} .top>div{flex:1}
+.num{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
+h2{margin:0;font-size:20px} .top p{margin:2px 0 0;color:var(--mut);font-size:14px}
+button{border:0;border-radius:12px;padding:11px 20px;font:600 15px inherit;font-family:inherit;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--a1),var(--a2));transition:transform .1s}
+button:active{transform:scale(.96)} button.ok{background:#22a55b}
+pre{margin:0;background:var(--code);border:1px solid var(--line);border-radius:14px;padding:16px;white-space:pre-wrap;word-break:break-word;font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:520px;overflow:auto}
+footer{color:var(--mut);font-size:13px;text-align:center}
+@media (max-width:760px){.steps{grid-template-columns:1fr 1fr}.top{flex-wrap:wrap}button{width:100%}}
+</style></head><body><div class="wrap">
+<header><div class="logo">S</div><div><h1>SlimBit Prompt</h1><p>Schöner zum Kopieren: `docs/PROMPT.html` öffnen (neu bauen mit `python3 scripts/prompt-html.py`).</p></div></header>
+<div class="steps"><div class="step"><span>1</span><b>Teil 1 kopieren</b><p>Knopf „Kopieren“, in eine neue Sitzung einfügen und deine App-Idee ganz unten anhängen.</p></div><div class="step"><span>2</span><b>Testen</b><p>Claude baut die App und gibt dir eine Testversion für Mac und Windows.</p></div><div class="step"><span>3</span><b>„Go“ schreiben</b><p>Dann wird alles automatisch auf GitHub veröffentlicht.</p></div><div class="step"><span>4</span><b>Teil 2 für Videos</b><p>Sprechtext einsprechen, Aufnahme schicken – du bekommst ein fertiges ZIP.</p></div></div>
+<section class="card">
+  <div class="top"><span class="num">1</span><div><h2>Teil 1 – Neue App (Idee unten anhängen)</h2><p>Neue App starten – deine Idee kommt unten ans Ende.</p></div>
+  <button data-t="p1">Kopieren</button></div>
+  <pre id="p1">ÜBER MICH &amp; MEINE MARKE (gilt für alles in diesem Chat)
+- Ich bin Anfänger-Entwickler aus Deutschland und unter 18. Erkläre alles kurz und einfach auf Deutsch,
+  aber das Ergebnis soll professionell sein. Mach so viel wie möglich selbst und sag mir nur genau,
+  welche wenigen Handgriffe ich machen muss (Schritt für Schritt, mit Klickpfad).
+- Wegen meines Alters: keine Dienste ab 18, nichts, was Geld kostet, keine Verträge, keine Ausweise.
+  Wenn so etwas nötig wäre, sag es und schlag eine kostenlose Alternative vor (oder: mit meinen Eltern klären).
+- Meine Marke: &quot;SlimBit Apps&quot;. Kleine, schlanke, kostenlose Desktop-Apps für Windows &amp; Mac.
+  E-Mail: SlimBitApps@gmail.com. Impressum/Datenschutz nur mit E-Mail (keine Adresse, kein Name).
+  Startseite: https://slimbitapps.github.io (Repo slimbitapps/slimbitapps.github.io, Apps in index.html → Liste APPS).
+- Vorlage für ALLES ist slimbitapps/SlimClick (neuer als SlimSort): Aufbau (Electron + React + TypeScript + Vite),
+  Design, Logo-Schema, &quot;Über&quot;-Bereich mit Link zur Startseite, GitHub Actions (build.yml + pages.yml),
+  Download-Seite in website/, Tests + E2E-Test mit Screenshots, Mehrsprachigkeit, Einfach-/Expertenmodus,
+  Einführung beim ersten Start, scripts/setup-tools.sh, scripts/test-build.sh, scripts/publish.sh, scripts/video/.
+  Lies dort zuerst README.md, docs/PLAN.md, docs/VEROEFFENTLICHEN.md und .github/workflows/.
+- App-Sprachen Englisch und Deutsch (gern mehr), Code-Kommentare auf Deutsch, App-Name auf Englisch.
+- Meine Fotos/Dateien niemals committen oder veröffentlichen.
+
+ARBEITSWEISE (damit es flüssig läuft)
+- Arbeite im festen Ordner ~/SlimBit/&lt;AppName&gt; (nicht im Sitzungsordner). Startseite liegt in ~/SlimBit/slimbitapps.github.io.
+- Werkzeuge liegen dauerhaft in ~/SlimBit-Tools (sonst: bash scripts/setup-tools.sh aus SlimClick).
+- Frag höchstens 3 kurze Fragen, nur wenn wirklich etwas Wichtiges fehlt. Sonst gleich loslegen.
+- Committe regelmäßig. Auf GitHub kommt erst etwas, wenn ich &quot;Go&quot; schreibe.
+
+PHASE 1 – BAUEN UND TESTEN
+1. Prüfe kurz, welche ähnlichen Tools es gibt und was wir besser machen. Schlag einen Namen vor, falls meiner nicht passt.
+2. Kurzer Plan (Version 1.0 und später), dann die App komplett bauen: Code, Tests, Logo im SlimBit-Stil, README.
+   Denk selbst über weitere sinnvolle Funktionen nach und bau sie ein.
+3. Teste selbst so viel wie möglich (Unit-Tests, E2E-Test, Screenshots der laufenden App) und schick mir Screenshots.
+4. Stell mir die App zum Testen bereit: bash scripts/test-build.sh (Mac-DMG + Windows-ZIP) und öffne den Ordner im Finder.
+   Sag mir genau, was ich auf Mac und Windows ausprobieren soll.
+
+PHASE 2 – WENN ICH &quot;GO&quot; SCHREIBE: VERÖFFENTLICHEN, GENAU WIE BEI SLIMCLICK
+1. Version 1.0.0, alles auf GitHub mit bash scripts/publish.sh: Repo slimbitapps/&lt;AppName&gt; anlegen, hochladen,
+   GitHub Pages einschalten, Release über GitHub Actions bauen lassen und prüfen, dass alle Dateien dran sind.
+   Builds nur bei echten Code-Änderungen, nicht bei Doku/Videos/Bildern.
+2. Download-Seite (website/ → https://slimbitapps.github.io/&lt;AppName&gt;/, Groß-/Kleinschreibung beachten, Weiterleitung
+   für die kleingeschriebene Adresse) mit Anleitung, FAQ und SEO (Meta-Tags, JSON-LD SoftwareApplication + FAQPage,
+   sitemap, robots, llms.txt), damit Google, ChatGPT und Gemini die App finden und empfehlen.
+3. App auf der Startseite eintragen (Liste APPS, Logo, sitemap.xml, llms.txt) und hochladen.
+4. In der App unter &quot;Über&quot; der Link zur Startseite.
+5. Store-/Portal-Texte (kurz, lang, Stichwörter) auf Deutsch und Englisch + 8–16 beschriftete Screenshots.
+6. Kurzer Plan, wo ich die App kostenlos eintragen kann (Portale, Reddit, Foren) mit fertigen Texten.
+   Alles, was ich selbst klicken muss, als Checkliste mit Klickpfad.
+Gib mir am Ende eine Liste der fertigen Links und Dateien.
+
+MEINE APP-IDEE:</pre>
+</section><section class="card">
+  <div class="top"><span class="num">2</span><div><h2>Teil 2 – Videos</h2><p>Wenn die App veröffentlicht ist und Videos kommen sollen.</p></div>
+  <button data-t="p2">Kopieren</button></div>
+  <pre id="p2">Jetzt die Videos, mit möglichst wenig Handgriffen für mich. Vorlage: scripts/video/ und docs/VIDEO-PIPELINE.md aus
+slimbitapps/SlimClick (Szenen-Engine, Bausteine, voice.py, align.py, render-all.sh, finish.sh, thumbnails.cjs, package.py).
+
+1. Sag mir, ob du Inhalte von mir brauchst (z. B. Fotos als ZIP). Wenn du Beispielinhalte selbst bauen kannst, brauchst du nichts.
+2. Schreib ALLE Sprechtexte – Intro (ca. 90 s) und 3 Shorts (je 25–35 s, ein Gedanke pro Short, Hook in der ersten
+   Sekunde, Prinzip als saubere Animation, am Ende echte App + Logo + &quot;Link in profile&quot;) – zusammen in EINEM Text
+   (python3 scripts/video/voice.py text). Zwischen den Videos steht &quot;Next video.&quot;. Englisch, fließende Sätze, keine
+   Aufzählungen, Absätze durch Leerzeilen = Szenen. Gib mir den ganzen Text in einem einzigen Kasten zum Kopieren.
+   Bau vorher noch KEIN Video.
+3. Ich lasse den Text in Clipchamp sprechen (Stimme Andrew, wie bei SlimSort), exportiere EINE Audiodatei und schicke
+   sie dir (auch als ZIP). Schneide sie selbst in die einzelnen Videos (voice.py split) und prüfe mit words.py: richtiger
+   Text? Absatzgrenzen? Dann baue die Videos und leg alle Ereignisse auf die gesprochenen Wörter.
+4. Jedes Video: eigene Hintergrundmusik (python3 scripts/video/music.py, Stil in videos.json &quot;music&quot;: pop / lofi /
+   epic, Standard pop; leiser, sobald gesprochen wird – keine fremde Musik, also kein Urheberrechts-Ärger),
+   Lautheit normalisiert, Effekte leise unter der Stimme, Untertitel im Bild, Thumbnail 0,5 s als Deckblatt am Anfang (ich darf auf YouTube noch keine Bilder hochladen). Prüfe selbst den Sync (Spracherkennung +
+   Standbilder), bevor du mir etwas schickst.
+5. Schick mir am Ende EIN ZIP mit den neuen Videos (python3 scripts/video/package.py --runde) und zusätzlich das
+   aktualisierte Komplett-ZIP des Projekts mit allen Videos (python3 scripts/video/package.py), beide in der festen Ordnerstruktur: je Video ein Ordner
+   mit ALLEM zum Hochladen (Video, Texte.html, Cover und Profilbild für YouTube, TikTok und Instagram, beim Intro
+   Vorschaubild + englische Untertitel), dazu Bilder-Posts/, Kanal/, Logo-und-Screenshots/ und ganz oben
+   Upload-Texte.html: eine Seite mit Kopier-Knopf an jedem Textfeld (Titel, Beschreibung mit Download-Link, Tags,
+   Hashtags, Kapitel, angepinnter Kommentar, TikTok- und Instagram-Text, Hinweise, bester Zeitpunkt zum Posten).
+   Kein Sprechtext in den Upload-Texten. Nur Englisch, keine Übersetzungen.
+Zielgruppe der Videos: junge Leute (Schüler, Studenten). Meine Dateien nie committen.</pre>
+</section>
+<footer>SlimBit Apps · SlimBitApps@gmail.com · Quelle: docs/PROMPT.md im Repo slimbitapps/SlimClick</footer>
+</div>
+<script>
+document.querySelectorAll('button[data-t]').forEach(b=>b.onclick=async()=>{
+  const t=document.getElementById(b.dataset.t).innerText;
+  try{await navigator.clipboard.writeText(t)}catch(_){const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();document.execCommand('copy');a.remove()}
+  b.textContent='✓ Kopiert';b.classList.add('ok');setTimeout(()=>{b.textContent='Kopieren';b.classList.remove('ok')},1800);
+});
+</script></body></html>
