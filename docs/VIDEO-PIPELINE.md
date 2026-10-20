@@ -40,14 +40,18 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
    Untertitel (nur Englisch): `python3 scripts/video/intro/subtitles.py private/work docs/SPRECHTEXT-INTRO.txt docs/<App>-Intro-EN.srt intro`.
 8. **Sync prüfen:** `words.py` auf jedem fertigen MP4 + `bash scripts/video/stills.sh VIDEO.mp4 private/check/x ZEITEN…`
    (Standbilder an den Schlüsselwörtern, alle Zeiten +0,5 s wegen Deckblatt).
-9. **Liefern:** `python3 scripts/video/package.py video-out` → **`<App>-Videos.zip`** in fester Ordnerstruktur:
-   `1-Intro/` · `2-Short1-…/` … (MP4 + Titelbild, Intro + SRT) · `Bilder/YouTube|TikTok|Instagram|Logo|Screenshots/`
-   · `Texte-zum-Kopieren.txt` · `LIESMICH.txt`. Fehlt etwas, bricht das Skript ab.
+9. **Upload-Texte:** je Video `docs/upload/<id>.json` (YouTube: Titel, Beschreibung, Tags, Kommentar · TikTok · Instagram · Hinweise),
+   Bilder-Posts in `docs/upload/posts.json`. **Kein Sprechtext** darin. Daraus baut `scripts/video/texts.py` die
+   **HTML-Seite mit Kopier-Knöpfen** und die Text-Datei.
+10. **Liefern:** `python3 scripts/video/package.py video-out` → **`<App>-Videos[-RundeN].zip`** in fester Struktur:
+   `Upload-Texte.html` (Kopier-Knöpfe) · `Upload-Texte.txt` · `LIESMICH.txt` ·
+   je Video ein Ordner mit ALLEM zum Hochladen (Video.mp4, Texte.html, YouTube-/TikTok-/Instagram-Cover und -Profilbild,
+   beim Intro Vorschaubild + Untertitel) · `Bilder-Posts/` · `Kanal/` · `Logo-und-Screenshots/`. Fehlt etwas, bricht es ab.
 
 ## Regeln
 - **Keine Übersetzungen** liefern (keine deutschen Untertitel/Titel) – nur Englisch.
 - **Deckblatt** immer 0,5 s am Anfang (finish.sh).
-- Dem Nutzer **nur das eine ZIP** schicken (9.) – darin Videos, alle Bilder und alle Texte.
+- Dem Nutzer **nur das eine ZIP** schicken (10.) – darin Videos, alle Bilder und die Kopier-Seite mit allen Texten.
 - Hook in der 1. Sekunde, ein Gedanke pro Short, 25–35 s, Prinzip als Animation, am Ende echte App + Logo + „Link in profile“.
 - Zielgruppe Schüler & Studenten: Referat-Situation, lockere Sprache, schnelle Schnitte, große Wörter.
 - Keine Maus-/Tastatur-Einblendungen über der echten App. Wortenden der Stimme nie abschneiden.

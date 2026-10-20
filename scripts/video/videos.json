@@ -12,7 +12,7 @@
       "h": 1920,
       "lufs": -14,
       "thumb": "SlimClick-Short4-Thumbnail.jpg",
-      "upload": "docs/shorts/SHORT4-UPLOAD.md",
+      "upload": "docs/upload/short4.json",
       "min": "3.4,5.0,7.0,4.4,4.6"
     },
     {
@@ -25,7 +25,7 @@
       "h": 1920,
       "lufs": -14,
       "thumb": "SlimClick-Short5-Thumbnail.jpg",
-      "upload": "docs/shorts/SHORT5-UPLOAD.md",
+      "upload": "docs/upload/short5.json",
       "min": "3.8,6.0,4.4,4.8,4.6"
     },
     {
@@ -38,7 +38,7 @@
       "h": 1920,
       "lufs": -14,
       "thumb": "SlimClick-Short6-Thumbnail.jpg",
-      "upload": "docs/shorts/SHORT6-UPLOAD.md",
+      "upload": "docs/upload/short6.json",
       "min": "3.4,4.4,4.2,6.0,4.6"
     }
   ],
@@ -56,7 +56,7 @@
           "h": 1080,
           "lufs": -15,
           "thumb": "SlimClick-Thumbnail.jpg",
-          "upload": "docs/YOUTUBE-INTRO.md",
+          "upload": "docs/upload/intro.json",
           "min": "7.6,5.2,6.6,7.4,6.6,7.0,9.0,7.4,7.2,7.6,9.0"
         },
         {
@@ -69,7 +69,7 @@
           "h": 1920,
           "lufs": -14,
           "thumb": "SlimClick-Short1-Thumbnail.jpg",
-          "upload": "docs/shorts/SHORT1-UPLOAD.md",
+          "upload": "docs/upload/short1.json",
           "min": "3.6,5.8,6.8,4.6,4.8"
         },
         {
@@ -82,7 +82,7 @@
           "h": 1920,
           "lufs": -14,
           "thumb": "SlimClick-Short2-Thumbnail.jpg",
-          "upload": "docs/shorts/SHORT2-UPLOAD.md",
+          "upload": "docs/upload/short2.json",
           "min": "3.2,4.6,5.4,4.8,4.6"
         },
         {
@@ -95,7 +95,7 @@
           "h": 1920,
           "lufs": -14,
           "thumb": "SlimClick-Short3-Thumbnail.jpg",
-          "upload": "docs/shorts/SHORT3-UPLOAD.md",
+          "upload": "docs/upload/short3.json",
           "min": "4.6,5.2,5.0,7.2,4.8"
         }
       ]

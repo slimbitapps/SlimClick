@@ -76,10 +76,11 @@ slimbitapps/SlimClick (Szenen-Engine, Bausteine, voice.py, align.py, render-all.
 4. Jedes Video: Lautheit normalisiert, Effekte leise unter der Stimme, Untertitel im Bild, Thumbnail 0,5 s als
    Deckblatt am Anfang (ich darf auf YouTube noch keine Bilder hochladen). Prüfe selbst den Sync (Spracherkennung +
    Standbilder), bevor du mir etwas schickst.
-5. Schick mir am Ende EIN ZIP (python3 scripts/video/package.py) in der festen Ordnerstruktur:
-   je Video ein Ordner mit MP4 + Titelbild (Intro + englische SRT), Bilder/ für YouTube, TikTok und Instagram
-   (Cover, Feed-Posts, Quadrat, Story, Profilbild, Banner, Logo, Screenshots) und Texte-zum-Kopieren.txt mit Titel,
-   Beschreibung mit Download-Link, Tags, Hashtags, Kapiteln, angepinntem Kommentar, TikTok- und Instagram-Texten
-   und dem besten Zeitpunkt zum Posten. Nur Englisch, keine Übersetzungen.
+5. Schick mir am Ende EIN ZIP (python3 scripts/video/package.py) in der festen Ordnerstruktur: je Video ein Ordner
+   mit ALLEM zum Hochladen (Video, Texte.html, Cover und Profilbild für YouTube, TikTok und Instagram, beim Intro
+   Vorschaubild + englische Untertitel), dazu Bilder-Posts/, Kanal/, Logo-und-Screenshots/ und ganz oben
+   Upload-Texte.html: eine Seite mit Kopier-Knopf an jedem Textfeld (Titel, Beschreibung mit Download-Link, Tags,
+   Hashtags, Kapitel, angepinnter Kommentar, TikTok- und Instagram-Text, Hinweise, bester Zeitpunkt zum Posten).
+   Kein Sprechtext in den Upload-Texten. Nur Englisch, keine Übersetzungen.
 Zielgruppe der Videos: junge Leute (Schüler, Studenten). Meine Dateien nie committen.
 ```
