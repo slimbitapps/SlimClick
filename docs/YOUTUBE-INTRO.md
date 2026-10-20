@@ -1,7 +1,7 @@
 # YouTube-Upload: SlimClick Intro-Video – alles zum Kopieren
 
 Dateien (von Claude geschickt): **`SlimClick-Intro.mp4`** (1920×1080, 1:23, Untertitel im Bild, **Deckblatt in der ersten halben Sekunde**) · **`SlimClick-Thumbnail.jpg`** (1280×720) ·
-**`SlimClick-Intro-EN.srt`** + **`SlimClick-Intro-DE.srt`** (Untertitel-Dateien, liegen auch in `docs/`)
+**`SlimClick-Intro-EN.srt`** (Untertitel-Datei, liegt auch in `docs/`)
 
 ---
 
@@ -58,20 +58,7 @@ presentation remote,phone as presentation clicker,powerpoint remote,control powe
 ```
 
 ## 4. Untertitel hochladen (wichtig für die Suche)
-1. YouTube Studio → Video → **Untertitel** → **Englisch** → **Hinzufügen** → **Datei hochladen** → „Mit Zeitangaben“ → **`SlimClick-Intro-EN.srt`** → Veröffentlichen.
-2. **Sprache hinzufügen** → **Deutsch** → **`SlimClick-Intro-DE.srt`** hochladen.
-3. Bei Deutsch auch **Titel & Beschreibung** übersetzen:
-   - Titel: `Handy als Präsentations-Fernbedienung – kostenlos, ohne App | SlimClick`
-   - Beschreibung:
-```
-Dein Handy als Presenter für PowerPoint, Keynote, Google Slides und PDF – kostenlos und ohne App-Installation. Für Windows und Mac.
-
-⬇️ Kostenlos herunterladen: https://slimbitapps.github.io/SlimClick/
-
-QR-Code scannen, Weiter tippen – fertig. Mit Folienvorschau am Handy, Laserpointer auf dem Beamer und Timer. Im Schul-WLAN klappt es über den Handy-Hotspot. Ohne Werbung, ohne Konto.
-
-Impressum: https://slimbitapps.github.io/impressum.html
-```
+YouTube Studio → Video → **Untertitel** → **Englisch** → **Hinzufügen** → **Datei hochladen** → „Mit Zeitangaben“ → **`SlimClick-Intro-EN.srt`** → Veröffentlichen.
 
 ## 5. Einstellungen beim Hochladen
 | Feld | Auswahl |

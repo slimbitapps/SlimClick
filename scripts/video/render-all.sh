@@ -13,3 +13,5 @@ for n in $NAMES; do
   # Thumbnail als Deckblatt (0,5 s) vorne + Lautheit (zwei Durchgänge)
   bash scripts/video/finish.sh "$W/out/$n-master.mp4" "$OUT/${F/-Intro/}-Thumbnail.jpg" "$OUT/$F.mp4" $LN
 done
+# Alle Upload-Texte in eine Text-Datei (für den Nutzer)
+python3 scripts/video/upload-texte.py "$OUT/SlimClick-Upload-Texte.txt"
