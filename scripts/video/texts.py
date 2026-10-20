@@ -20,7 +20,8 @@ APP = CFG['app']
 
 def all_videos():
     vs = [v for b in CFG.get('done', []) for v in b['videos']] + CFG['videos']
-    return {v['id']: v for v in vs}
+    fo = json.loads(os.environ.get('FOLDERS', '{}'))  # package.py nummeriert im Komplett-Paket neu
+    return {v['id']: {**v, 'folder': fo.get(v['id'], v['folder'])} for v in vs}
 
 
 # ---------------------------------------------------------------- Import aus den alten Markdown-Anleitungen

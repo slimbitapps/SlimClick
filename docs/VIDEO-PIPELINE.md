@@ -43,7 +43,8 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
 9. **Upload-Texte:** je Video `docs/upload/<id>.json` (YouTube: Titel, Beschreibung, Tags, Kommentar · TikTok · Instagram · Hinweise),
    Bilder-Posts in `docs/upload/posts.json`. **Kein Sprechtext** darin. Daraus baut `scripts/video/texts.py` die
    **HTML-Seite mit Kopier-Knöpfen** und die Text-Datei.
-10. **Liefern:** `python3 scripts/video/package.py video-out` → **`<App>-Videos[-RundeN].zip`** in fester Struktur:
+10. **Liefern:** `python3 scripts/video/package.py video-out --runde` → **`<App>-Videos[-RundeN].zip`** (nur die neue Runde),
+   ohne `--runde` → **`<App>-Komplett.zip`** (alle Runden, neu durchnummeriert). Beide in fester Struktur:
    `Upload-Texte.html` (Kopier-Knöpfe) · `Upload-Texte.txt` · `LIESMICH.txt` ·
    je Video ein Ordner mit ALLEM zum Hochladen (Video.mp4, Texte.html, YouTube-/TikTok-/Instagram-Cover und -Profilbild,
    beim Intro Vorschaubild + Untertitel) · `Bilder-Posts/` · `Kanal/` · `Logo-und-Screenshots/`. Fehlt etwas, bricht es ab.
@@ -56,3 +57,10 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
 - Zielgruppe Schüler & Studenten: Referat-Situation, lockere Sprache, schnelle Schnitte, große Wörter.
 - Keine Maus-/Tastatur-Einblendungen über der echten App. Wortenden der Stimme nie abschneiden.
 - Dateien des Nutzers (Stimmen, Fotos) liegen in `private/` – steht in `.gitignore`.
+
+## Hintergrundmusik (eigene, per Code)
+- `python3 scripts/video/music.py STIL SEKUNDEN OUT.wav [--seed N]` – Stile `pop` (fröhlich, 116 BPM), `lofi` (ruhig, 78 BPM),
+  `epic` (filmisch, 92 BPM). Nur numpy, gehört uns → keine Content-ID-Ansprüche. `--seed` = andere Variante.
+- `finish.sh` legt sie automatisch unter (Lautstärke 16 %, `MUSIC_VOL=` zum Ändern, Ducking über die Stimme).
+  Stil in `videos.json` → `"music"` (für alle) oder je Video `"music"`/`"seed"`; `"none"` = ohne Musik.
+- Prüfen: `words.py` auf dem fertigen Video muss die Stimme genauso gut erkennen wie ohne Musik.

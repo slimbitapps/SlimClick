@@ -73,10 +73,12 @@ slimbitapps/SlimClick (Szenen-Engine, Bausteine, voice.py, align.py, render-all.
 3. Ich lasse den Text in Clipchamp sprechen (Stimme Andrew, wie bei SlimSort), exportiere EINE Audiodatei und schicke
    sie dir (auch als ZIP). Schneide sie selbst in die einzelnen Videos (voice.py split) und prüfe mit words.py: richtiger
    Text? Absatzgrenzen? Dann baue die Videos und leg alle Ereignisse auf die gesprochenen Wörter.
-4. Jedes Video: Lautheit normalisiert, Effekte leise unter der Stimme, Untertitel im Bild, Thumbnail 0,5 s als
-   Deckblatt am Anfang (ich darf auf YouTube noch keine Bilder hochladen). Prüfe selbst den Sync (Spracherkennung +
+4. Jedes Video: eigene Hintergrundmusik (python3 scripts/video/music.py, Stil in videos.json "music": pop / lofi /
+   epic, Standard pop; leiser, sobald gesprochen wird – keine fremde Musik, also kein Urheberrechts-Ärger),
+   Lautheit normalisiert, Effekte leise unter der Stimme, Untertitel im Bild, Thumbnail 0,5 s als Deckblatt am Anfang (ich darf auf YouTube noch keine Bilder hochladen). Prüfe selbst den Sync (Spracherkennung +
    Standbilder), bevor du mir etwas schickst.
-5. Schick mir am Ende EIN ZIP (python3 scripts/video/package.py) in der festen Ordnerstruktur: je Video ein Ordner
+5. Schick mir am Ende EIN ZIP mit den neuen Videos (python3 scripts/video/package.py --runde) und zusätzlich das
+   aktualisierte Komplett-ZIP des Projekts mit allen Videos (python3 scripts/video/package.py), beide in der festen Ordnerstruktur: je Video ein Ordner
    mit ALLEM zum Hochladen (Video, Texte.html, Cover und Profilbild für YouTube, TikTok und Instagram, beim Intro
    Vorschaubild + englische Untertitel), dazu Bilder-Posts/, Kanal/, Logo-und-Screenshots/ und ganz oben
    Upload-Texte.html: eine Seite mit Kopier-Knopf an jedem Textfeld (Titel, Beschreibung mit Download-Link, Tags,
