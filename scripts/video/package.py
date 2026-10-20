@@ -41,19 +41,21 @@ for v in CFG['videos']:
         copies.append((need(os.path.join(OUT, v['thumb'])), f"{v['folder']}/Cover-1080x1920.jpg"))
 # Bilder nach Plattform
 B = 'Bilder'
-intro = next(v for v in CFG['videos'] if v['id'] == 'intro')
-copies += [(need(os.path.join(OUT, intro['thumb'])), f'{B}/YouTube/Intro-Vorschaubild-1280x720.jpg'),
-           (need(os.path.join(OUT, f'{APP}-Square.jpg')), f'{B}/YouTube/Community-Beitrag-1080x1080.jpg'),
+intro = next((v for v in CFG['videos'] if v['id'] == 'intro'), None)
+if intro:
+    copies.append((need(os.path.join(OUT, intro['thumb'])), f'{B}/YouTube/Intro-Vorschaubild-1280x720.jpg'))
+copies += [(need(os.path.join(OUT, f'{APP}-Square.jpg')), f'{B}/YouTube/Community-Beitrag-1080x1080.jpg'),
            (need('brand/slimbit-avatar-800.png'), f'{B}/YouTube/Kanal-Profilbild-800x800.png'),
            (need('brand/slimbit-youtube-banner-2560x1440.jpg'), f'{B}/YouTube/Kanal-Banner-2560x1440.jpg'),
            (need('brand/slimbit-avatar-800.png'), f'{B}/TikTok/Profilbild-800x800.png'),
            (need('brand/slimbit-avatar-800.png'), f'{B}/Instagram/Profilbild-800x800.png'),
            (need(os.path.join(OUT, f'{APP}-Square.jpg')), f'{B}/Instagram/Post-Quadrat-1080x1080.jpg'),
            (need(os.path.join(OUT, f'{APP}-Story.jpg')), f'{B}/Instagram/Story-1080x1920.jpg')]
-for i, v in enumerate(shorts, 1):
+for v in shorts:
     t = need(os.path.join(OUT, v['thumb']))
-    copies += [(t, f'{B}/YouTube/Short{i}-Cover-1080x1920.jpg'), (t, f'{B}/TikTok/Short{i}-Cover-1080x1920.jpg'),
-               (t, f'{B}/Instagram/Reel{i}-Cover-1080x1920.jpg')]
+    n = v['title'].replace(' ', '')
+    copies += [(t, f'{B}/YouTube/{n}-Cover-1080x1920.jpg'), (t, f'{B}/TikTok/{n}-Cover-1080x1920.jpg'),
+               (t, f"{B}/Instagram/{n.replace('Short', 'Reel')}-Cover-1080x1920.jpg")]
 for f in sorted(glob.glob(os.path.join(OUT, f'{APP}-Post-*.jpg'))):
     copies.append((f, f"{B}/Instagram/{os.path.basename(f).replace(APP + '-', '').replace('.jpg', '-1080x1350.jpg')}"))
 copies += [(need('build/icon.png'), f'{B}/Logo/{APP}-Symbol-1024.png'), (need('brand/logo-square.png'), f'{B}/Logo/{APP}-Logo-512.png'),
@@ -83,7 +85,7 @@ Reihenfolge zum Posten (Abstand 2–3 Tage, So–Do 18–20 Uhr):
 Titelbild: Jedes Video beginnt mit einer halben Sekunde Deckblatt. Beim Hochladen als Cover den Regler
 ganz an den Anfang schieben. (Eigene Bilder hochladen geht bei deinem YouTube-Konto noch nicht.)
 """)
-zf = os.path.join(OUT, f'{APP}-Videos.zip')
+zf = os.path.join(OUT, f"{APP}-Videos{'-Runde' + str(CFG['batch']) if CFG.get('batch', 1) > 1 else ''}.zip")
 if os.path.exists(zf):
     os.remove(zf)
 subprocess.run(['zip', '-qr', zf, f'{APP}-Videos'], cwd=tmp, check=True)

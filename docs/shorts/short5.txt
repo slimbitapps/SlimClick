@@ -1,0 +1,9 @@
+Worried a classmate could take over your slides? Here's why they can't.
+
+The QR code in SlimClick only works once. As soon as your phone connects, the code changes, so a photo of it is useless.
+
+Every tap you make is signed, so nobody else on the Wi-Fi can fake one.
+
+And if another phone tries to join, your laptop asks you first. You decide.
+
+SlimClick is free for Windows and Mac. The link is in my profile.

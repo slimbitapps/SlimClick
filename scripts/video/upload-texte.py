@@ -42,12 +42,12 @@ def section(title, md, speech=None):
 
 docs = os.path.join(ROOT, 'docs')
 text = f'ALLE TEXTE ZU DEN VIDEOS – zum Kopieren\n(automatisch erzeugt aus docs/*.md – bei Änderungen dort neu erzeugen)\n\n'
-intro = os.path.join(docs, 'YOUTUBE-INTRO.md')
-if os.path.exists(intro):
-    text += section('Intro-Video (YouTube)', open(intro).read(), os.path.join(docs, 'SPRECHTEXT-INTRO.txt'))
-for f in sorted(glob.glob(os.path.join(docs, 'shorts', 'SHORT*-UPLOAD.md'))):
-    n = re.search(r'SHORT(\d+)', f).group(1)
-    text += section(f'Short {n}', open(f).read(), os.path.join(docs, 'shorts', f'short{n}.txt'))
+import json
+CFG = json.load(open(os.path.join(ROOT, 'scripts', 'video', 'videos.json')))
+for v in CFG['videos']:  # nur die aktuelle Runde
+    up = os.path.join(ROOT, v['upload'])
+    if os.path.exists(up):
+        text += section(('Intro-Video (YouTube)' if v['id'] == 'intro' else v['title']), open(up).read(), os.path.join(ROOT, v['text']))
 social = os.path.join(docs, 'SOCIAL-POSTS.md')
 if os.path.exists(social):
     text += section('Bilder-Posts (Instagram, Story, YouTube-Community)', open(social).read())

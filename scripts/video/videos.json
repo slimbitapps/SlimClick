@@ -2,9 +2,104 @@
   "app": "SlimClick",
   "marker": "Next video.",
   "videos": [
-    { "id": "intro", "folder": "1-Intro", "title": "Intro", "text": "docs/SPRECHTEXT-INTRO.txt", "page": "scripts/video/intro/compositor.html", "w": 1920, "h": 1080, "lufs": -15, "thumb": "SlimClick-Thumbnail.jpg", "upload": "docs/YOUTUBE-INTRO.md", "min": "7.6,5.2,6.6,7.4,6.6,7.0,9.0,7.4,7.2,7.6,9.0" },
-    { "id": "short1", "folder": "2-Short1-Clicker", "title": "Short 1", "text": "docs/shorts/short1.txt", "page": "scripts/video/shorts/short1.html", "w": 1080, "h": 1920, "lufs": -14, "thumb": "SlimClick-Short1-Thumbnail.jpg", "upload": "docs/shorts/SHORT1-UPLOAD.md", "min": "3.6,5.8,6.8,4.6,4.8" },
-    { "id": "short2", "folder": "3-Short2-Laser", "title": "Short 2", "text": "docs/shorts/short2.txt", "page": "scripts/video/shorts/short2.html", "w": 1080, "h": 1920, "lufs": -14, "thumb": "SlimClick-Short2-Thumbnail.jpg", "upload": "docs/shorts/SHORT2-UPLOAD.md", "min": "3.2,4.6,5.4,4.8,4.6" },
-    { "id": "short3", "folder": "4-Short3-WiFi", "title": "Short 3", "text": "docs/shorts/short3.txt", "page": "scripts/video/shorts/short3.html", "w": 1080, "h": 1920, "lufs": -14, "thumb": "SlimClick-Short3-Thumbnail.jpg", "upload": "docs/shorts/SHORT3-UPLOAD.md", "min": "4.6,5.2,5.0,7.2,4.8" }
-  ]
+    {
+      "id": "short4",
+      "folder": "1-Short4-Timer",
+      "title": "Short 4",
+      "text": "docs/shorts/short4.txt",
+      "page": "scripts/video/shorts/short4.html",
+      "w": 1080,
+      "h": 1920,
+      "lufs": -14,
+      "thumb": "SlimClick-Short4-Thumbnail.jpg",
+      "upload": "docs/shorts/SHORT4-UPLOAD.md",
+      "min": "3.4,5.0,7.0,4.4,4.6"
+    },
+    {
+      "id": "short5",
+      "folder": "2-Short5-Secure",
+      "title": "Short 5",
+      "text": "docs/shorts/short5.txt",
+      "page": "scripts/video/shorts/short5.html",
+      "w": 1080,
+      "h": 1920,
+      "lufs": -14,
+      "thumb": "SlimClick-Short5-Thumbnail.jpg",
+      "upload": "docs/shorts/SHORT5-UPLOAD.md",
+      "min": "3.8,6.0,4.4,4.8,4.6"
+    },
+    {
+      "id": "short6",
+      "folder": "3-Short6-Preview",
+      "title": "Short 6",
+      "text": "docs/shorts/short6.txt",
+      "page": "scripts/video/shorts/short6.html",
+      "w": 1080,
+      "h": 1920,
+      "lufs": -14,
+      "thumb": "SlimClick-Short6-Thumbnail.jpg",
+      "upload": "docs/shorts/SHORT6-UPLOAD.md",
+      "min": "3.4,4.4,4.2,6.0,4.6"
+    }
+  ],
+  "done": [
+    {
+      "batch": 1,
+      "videos": [
+        {
+          "id": "intro",
+          "folder": "1-Intro",
+          "title": "Intro",
+          "text": "docs/SPRECHTEXT-INTRO.txt",
+          "page": "scripts/video/intro/compositor.html",
+          "w": 1920,
+          "h": 1080,
+          "lufs": -15,
+          "thumb": "SlimClick-Thumbnail.jpg",
+          "upload": "docs/YOUTUBE-INTRO.md",
+          "min": "7.6,5.2,6.6,7.4,6.6,7.0,9.0,7.4,7.2,7.6,9.0"
+        },
+        {
+          "id": "short1",
+          "folder": "2-Short1-Clicker",
+          "title": "Short 1",
+          "text": "docs/shorts/short1.txt",
+          "page": "scripts/video/shorts/short1.html",
+          "w": 1080,
+          "h": 1920,
+          "lufs": -14,
+          "thumb": "SlimClick-Short1-Thumbnail.jpg",
+          "upload": "docs/shorts/SHORT1-UPLOAD.md",
+          "min": "3.6,5.8,6.8,4.6,4.8"
+        },
+        {
+          "id": "short2",
+          "folder": "3-Short2-Laser",
+          "title": "Short 2",
+          "text": "docs/shorts/short2.txt",
+          "page": "scripts/video/shorts/short2.html",
+          "w": 1080,
+          "h": 1920,
+          "lufs": -14,
+          "thumb": "SlimClick-Short2-Thumbnail.jpg",
+          "upload": "docs/shorts/SHORT2-UPLOAD.md",
+          "min": "3.2,4.6,5.4,4.8,4.6"
+        },
+        {
+          "id": "short3",
+          "folder": "4-Short3-WiFi",
+          "title": "Short 3",
+          "text": "docs/shorts/short3.txt",
+          "page": "scripts/video/shorts/short3.html",
+          "w": 1080,
+          "h": 1920,
+          "lufs": -14,
+          "thumb": "SlimClick-Short3-Thumbnail.jpg",
+          "upload": "docs/shorts/SHORT3-UPLOAD.md",
+          "min": "4.6,5.2,5.0,7.2,4.8"
+        }
+      ]
+    }
+  ],
+  "batch": 2
 }

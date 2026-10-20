@@ -1,57 +1,33 @@
-Picture this. You're in front of the whole class, your slides are on the projector, and for every new slide you have to walk back to your laptop.
+Running out of time in the middle of your presentation is the worst.
 
-Or you ask a friend to click for you, and somehow they're always one slide behind.
+SlimClick has a timer right on your phone. Pick ten, fifteen or twenty minutes and tap start.
 
-That's why I built SlimClick. It turns your phone into a presentation remote, and you don't even have to install an app.
+A few minutes before the end, your phone screen quietly flashes yellow. Nobody in the room notices, but you know it's time to wrap up.
 
-You open SlimClick on your laptop, scan the QR code with your phone's camera, and a web page opens. That's your remote.
-
-Now you just tap next. It works with PowerPoint, Keynote, Google Slides and even PDFs.
-
-Your phone also shows a live preview of the current slide, so you can face your audience and still know exactly where you are.
-
-Want to point at something? Turn on the laser, touch the preview, and a red dot appears right there on the big screen. The spotlight darkens everything else.
-
-There's a timer as well. A few minutes before the end, your phone screen flashes quietly, so you never run over time again.
-
-And if your school Wi-Fi blocks the connection, SlimClick shows you step by step how to use your phone's hotspot instead.
-
-It's also secure. The QR code only works once, every command is signed, and nobody else can take over your slides without your permission.
-
-SlimClick is completely free for Windows and Mac, with no ads and no account. You'll find the link in the description. Good luck with your next presentation.
-
-Next video.
-
-Forgot your clicker before a presentation? Your phone can do the job.
-
-Open SlimClick on your laptop and scan the QR code with your camera. There's no app to install.
-
-Now every tap on your phone moves your slides forward, in PowerPoint, Keynote, Google Slides or a PDF.
-
-You even get a live preview, so you always know which slide comes next.
+When the time is up, it flashes red, so you never run over again.
 
 SlimClick is free for Windows and Mac. The link is in my profile.
 
 Next video.
 
-You don't need a laser pointer for your next presentation.
+Worried a classmate could take over your slides? Here's why they can't.
 
-Just turn on the laser in SlimClick and touch the slide preview on your phone.
+The QR code in SlimClick only works once. As soon as your phone connects, the code changes, so a photo of it is useless.
 
-A red dot appears exactly where your finger is, right on the projector.
+Every tap you make is signed, so nobody else on the Wi-Fi can fake one.
 
-Want everyone to look at one spot? The spotlight darkens everything else.
+And if another phone tries to join, your laptop asks you first. You decide.
 
-It's free for Windows and Mac. The link is in my profile.
+SlimClick is free for Windows and Mac. The link is in my profile.
 
 Next video.
 
-Your phone won't connect to your laptop at school? That's the school Wi-Fi, not you.
+Stop turning your back to the class to check your slides.
 
-A lot of school networks keep devices apart, so your phone simply can't see your laptop.
+SlimClick shows a live preview of the current slide right on your phone.
 
-The fix takes ten seconds. Turn on your phone's hotspot and connect your laptop to it.
+So you can look at your audience and still know exactly where you are.
 
-SlimClick updates the QR code by itself. Scan it again, and you're back in control. It doesn't even use your mobile data.
+Need to jump back to slide three for a question? Tap go to, type three, and you're there.
 
 SlimClick is free for Windows and Mac. The link is in my profile.
