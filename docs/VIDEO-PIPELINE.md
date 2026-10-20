@@ -42,12 +42,14 @@ und für SlimClick: keine Bildschirmaufnahme nötig – die Videos bestehen aus 
    (berücksichtigt das Deckblatt automatisch).
 8. **Alle Texte in einer Datei:** `python3 scripts/video/upload-texte.py` → `docs/UPLOAD-TEXTE.txt`
    (Sprechtext, Titel, Beschreibung, Tags, Kommentar, TikTok, Instagram, Zeitpunkt – für alle Videos; macht auch render-all.sh).
-9. **Sync prüfen:** `words.py FINAL.mp4` + Standbilder an den Schlüsselwörtern (alle Zeiten +0,5 s wegen Deckblatt).
+9. **Alle Bilder in einem ZIP:** `bash scripts/video/make-zip.sh video-out` → `SlimClick-Bilder.zip`
+   (YouTube, TikTok, Instagram, Logo, Screenshots – nach Plattform sortiert; macht auch render-all.sh).
+10. **Sync prüfen:** `words.py FINAL.mp4` + Standbilder an den Schlüsselwörtern (alle Zeiten +0,5 s wegen Deckblatt).
 
 ## Regeln
 - **Keine Übersetzungen** liefern (keine deutschen Untertitel/Titel) – nur Englisch.
 - **Deckblatt** immer 0,5 s am Anfang (siehe 7.).
-- Dem Nutzer **immer zusätzlich eine Text-Datei mit allen Texten aller Videos** schicken (siehe 8.).
+- Dem Nutzer **immer zusätzlich eine Text-Datei mit allen Texten aller Videos** (8.) **und ein ZIP mit allen Bildern** für YouTube, TikTok und Instagram (9.) schicken.
 - Hook in der 1. Sekunde, ein Gedanke pro Short, 25–35 s, Prinzip als Animation, am Ende echte App + Logo + „Link in profile“.
 - Zielgruppe Schüler & Studenten: Referat-Situation, lockere Sprache, schnelle Schnitte, große Wörter.
 - Keine Maus-/Tastatur-Einblendungen über der echten App. Wortenden der Stimme nie abschneiden.

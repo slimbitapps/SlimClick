@@ -15,3 +15,5 @@ for n in $NAMES; do
 done
 # Alle Upload-Texte in eine Text-Datei (für den Nutzer)
 python3 scripts/video/upload-texte.py "$OUT/SlimClick-Upload-Texte.txt"
+# Alle Bilder für YouTube, TikTok, Instagram in ein ZIP
+bash scripts/video/make-zip.sh "$OUT"

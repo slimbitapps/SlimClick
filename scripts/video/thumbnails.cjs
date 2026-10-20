@@ -2,7 +2,7 @@
 /**
  * Thumbnails für YouTube/TikTok/Instagram: großer Text + echtes Motiv aus der App.
  *   node scripts/video/thumbnails.cjs AUSGABEORDNER
- * Intro: 1280×720 · Shorts: 1080×1920
+ * Intro: 1280×720 · Shorts: 1080×1920 · Quadrat 1080×1080 · Instagram-Feed 1080×1350 · Story 1080×1920
  */
 const path = require('node:path');
 const fs = require('node:fs');
@@ -47,6 +47,32 @@ const THUMBS = {
     <div class="b" style="left:50%;transform:translateX(-50%);top:1480px;font-size:60px;white-space:nowrap">📶 Hotspot = fixed</div>
     <div class="t" style="left:0;right:0;top:1700px;font-size:110px;text-align:center"><span class="g">10-second fix</span></div>`,
     `const o = phone(stage, { x: 390, y: 690, w: 300 }); o.deck.show(0);`],
+  // ---------- Social-Media-Bilder (Feed-Posts, Community-Beitrag, Story)
+  'SlimClick-Square.jpg': [1080, 1080, `
+    <div class="t" style="left:70px;top:120px;font-size:112px">Your <span class="g">phone</span><br>is the<br>clicker.</div>
+    <div class="b" style="left:74px;top:640px;font-size:38px">FREE · Windows &amp; Mac</div>
+    <div style="position:absolute;left:74px;top:760px;width:560px;font-size:34px;line-height:1.35;font-weight:700;color:#d6cfd6;z-index:5">No app on your phone.<br>PowerPoint · Keynote ·<br>Google Slides · PDF</div>`,
+    `const o = phone(stage, { x: 700, y: 150, w: 320 }); o.deck.show(0); o.rig.style.transform += ' rotate(6deg)';`],
+  'SlimClick-Post-1-Clicker.jpg': [1080, 1350, `
+    <div class="t" style="left:60px;right:60px;top:90px;font-size:120px;text-align:center">Forgot your<br>clicker?</div>
+    <div class="t" style="left:0;right:0;top:1180px;font-size:84px;text-align:center"><span class="g">Use your phone.</span></div>`,
+    `const o = phone(stage, { x: 370, y: 380, w: 340 }); o.deck.show(1); css(o.tap, { left: '242px', top: '590px', opacity: .9, transform: 'scale(.9)' });`],
+  'SlimClick-Post-2-Laser.jpg': [1080, 1350, `
+    <div class="t" style="left:60px;right:60px;top:80px;font-size:120px;text-align:center">No laser pointer?</div>
+    <div class="t" style="left:0;right:0;top:1200px;font-size:80px;text-align:center"><span class="g">Tap. Point. Done.</span></div>`,
+    `const w = screenWall(stage, { x: 90, y: 290, w: 900 }); w.deck.show(1); w.laser(.74, .38, 1);
+     const o = phone(stage, { x: 400, y: 760, w: 210 }); o.deck.show(1); toolOn(o, 0, true); o.ring.style.opacity = 1; phoneLaser(o, .74, .38, 1);`],
+  'SlimClick-Post-3-WiFi.jpg': [1080, 1350, `
+    <div class="t" style="left:60px;right:60px;top:90px;font-size:112px;text-align:center">School Wi-Fi<br>blocks it?</div>
+    ${[0, 1, 2].map((i) => `<div style="position:absolute;left:${540 - 230 - i * 110}px;top:${720 - 230 - i * 110}px;width:${460 + i * 220}px;height:${460 + i * 220}px;border-radius:50%;border:9px solid rgba(51,195,122,${0.8 - i * 0.25})"></div>`).join('')}
+    <div class="t" style="left:0;right:0;top:1180px;font-size:84px;text-align:center"><span class="g">Hotspot = fixed</span></div>`,
+    `const o = phone(stage, { x: 420, y: 470, w: 240 }); o.deck.show(0);`],
+  'SlimClick-Story.jpg': [1080, 1920, `
+    <div class="t" style="left:60px;right:60px;top:220px;font-size:130px;text-align:center">Your phone<br>is the <span class="g">clicker.</span></div>
+    <img src="${ICON}" style="position:absolute;left:440px;top:1280px;width:200px;z-index:5">
+    <div class="t" style="left:0;right:0;top:1500px;font-size:110px;text-align:center">SlimClick</div>
+    <div class="b" style="left:50%;transform:translateX(-50%);top:1660px;font-size:52px;white-space:nowrap">Free download · link in bio</div>`,
+    `const o = phone(stage, { x: 380, y: 560, w: 320 }); o.deck.show(0);`],
 };
 
 (async () => {

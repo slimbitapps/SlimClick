@@ -1,7 +1,7 @@
 """Schreibt alle Texte zu allen Videos in EINE einfache Text-Datei (zum Kopieren beim Hochladen).
 
   python3 scripts/video/upload-texte.py [AUSGABE.txt]
-Quelle: docs/YOUTUBE-INTRO.md, docs/shorts/SHORT*-UPLOAD.md und die Sprechtexte.
+Quelle: docs/YOUTUBE-INTRO.md, docs/shorts/SHORT*-UPLOAD.md, docs/SOCIAL-POSTS.md und die Sprechtexte.
 Markdown wird zu reinem Text (keine Sternchen, keine Code-Kästen, Tabellen als „Feld: Wert“).
 """
 import glob, os, re, sys
@@ -24,7 +24,7 @@ def plain(md):
             if cells[0] in ('Feld', 'Zeit'):
                 continue
             ln = f'- {cells[0]}: ' + ' | '.join(cells[1:])
-        ln = re.sub(r'^#{1,6}\s*', '', ln)
+        ln = re.sub(r'^#{1,6}\s+', '', ln)  # nur Überschriften, keine Hashtags
         ln = ln.replace('**', '').replace('`', '')
         ln = re.sub(r'^> ?', '', ln)
         out.append(ln.rstrip())
@@ -48,5 +48,8 @@ if os.path.exists(intro):
 for f in sorted(glob.glob(os.path.join(docs, 'shorts', 'SHORT*-UPLOAD.md'))):
     n = re.search(r'SHORT(\d+)', f).group(1)
     text += section(f'Short {n}', open(f).read(), os.path.join(docs, 'shorts', f'short{n}.txt'))
+social = os.path.join(docs, 'SOCIAL-POSTS.md')
+if os.path.exists(social):
+    text += section('Bilder-Posts (Instagram, Story, YouTube-Community)', open(social).read())
 open(OUT, 'w').write(text.rstrip() + '\n')
 print('→', OUT)
